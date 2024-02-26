@@ -58,7 +58,6 @@ const PHOTO_DESCRIPTIONS = [
 ];
 
 const MAX_USERS = 25;
-const MIN_USERS = 1;
 const MAX_LIKES = 200;
 const MIN_LIKES = 15;
 const MIN_COMMENTS = 0;
@@ -66,80 +65,49 @@ const MAX_COMMENTS = 30;
 const MIN_AVATAR = 1;
 const MAX_AVATAR = 6;
 
-const getRandomIntegerInterval = (min, max) => {
+const getRandomInteger = (min, max) => {
   const lower = Math.ceil(Math.min(Math.abs(min), Math.abs(max)));
   const upper = Math.floor(Math.max(Math.abs(min), Math.abs(max)));
   const result = Math.random() * (upper - lower + 1) + lower;
   return Math.floor(result);
 };
 
-const getRandomInteger = () =>
-  Math.floor(Math.random() * (Number.MAX_SAFE_INTEGER + 1));
-
-// const getRandomIdfromRangeGenerator = (min, max) => {
-//   const inUseId = [];
-
-//   return () => {
-//     let currentId = getRandomIntegerInterval(min, max);
-//     inUseId.length >= max - min + 1
-//       ? (console.error('Все уникальные ID заняты'), null)
-//       : inUseId;
-//     while (inUseId.includes(currentId)) {
-//       currentId = getRandomIntegerInterval(min, max);
-//     }
-//     inUseId.push(currentId);
-//     return currentId;
-//   };
-// };
-
-const getRandomIdfromRangeGenerator = (min, max) => {
-  const inUseId = [];
-
-  return () => {
-    let currentId = getRandomIntegerInterval(min, max);
-    inUseId.length >= max - min + 1
-      ? (console.error('Все уникальные ID заняты'), null)
-      : inUseId;
-    while (inUseId.includes(currentId)) {
-      currentId = getRandomIntegerInterval(min, max);
-    }
-    inUseId.push(currentId);
-    return currentId;
-  };
+const getRandomId = () => {
+  let counter = 1;
+  return () => counter++;
 };
 
-const getUserId = getRandomIdfromRangeGenerator(MIN_USERS, MAX_USERS);
-const getUserPhoto = getRandomIdfromRangeGenerator(MIN_USERS, MAX_USERS);
-const getRandomArrayElement = (elements) =>
-  elements[getRandomIntegerInterval(0, elements.length - 1)];
+const getUserId = getRandomId();
+const getUserPhoto = getRandomId();
+const getCommentId = getRandomId();
 
-// функция для генерации текста комментария
-const getCommentMessage = (text) => {
-  const textArray = text.split(/[.!?]+ /);
-  return getRandomArrayElement(textArray);
+const getRandomArrayElement = (elements) =>
+  elements[getRandomInteger(0, elements.length - 1)];
+
+const getCommentIdMessage = (text) => {
+  const textArray = text.split(/[.!?]+ |\.!\?/);
+  return `${getRandomArrayElement(textArray) }.`;
 };
 
 const createComment = () => ({
-  id: getRandomInteger(),
-  avatar: `img/avatar-${getRandomIntegerInterval(MIN_AVATAR, MAX_AVATAR)}.svg`,
-  message: getCommentMessage(RANDOM_TEXT),
+  id: getCommentId(),
+  avatar: `img/avatar-${getRandomInteger(MIN_AVATAR, MAX_AVATAR)}.svg`,
+  message: getCommentIdMessage(RANDOM_TEXT),
   name: getRandomArrayElement(NAMES),
 });
 
-const addComment = () => {return Array.from(
-  { length: getRandomIntegerInterval(MIN_COMMENTS, MAX_COMMENTS) },
+const addComment = () => Array.from(
+  { length: getRandomInteger(MIN_COMMENTS, MAX_COMMENTS) },
   createComment
-)}
+);
 
-const createUser = () => {
-  return {
-    id: getUserId(),
-    url: `photos/${getUserPhoto()}.jpg`,
-    description: getRandomArrayElement(PHOTO_DESCRIPTIONS),
-    likes: getRandomIntegerInterval(MIN_LIKES, MAX_LIKES),
-    comments: addComment(),
-  };
-};
+const createUser = () => ({
+  id: getUserId(),
+  url: `photos/${getUserPhoto()}.jpg`,
+  description: getRandomArrayElement(PHOTO_DESCRIPTIONS),
+  likes: getRandomInteger(MIN_LIKES, MAX_LIKES),
+  comments: addComment(),
+});
 
 const addUser = Array.from({ length: MAX_USERS }, createUser);
 
