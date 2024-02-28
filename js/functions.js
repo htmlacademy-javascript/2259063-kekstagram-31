@@ -1,48 +1,34 @@
-// 1) --- проверяем длину строки на предельно допустимую
 
-const checkLength = (string, maxLength) => string.length <= maxLength;
+// Делу время
+const checkMeet = (workDayStart, workDayEnd, meetStart, meetDuration) => {
+  let [startHours, startMinutes] = workDayStart.split(':');
+  let [endHours, endMinutes] = workDayEnd.split(':');
+  let [MeetStartHours, MeetStartMinutes] = meetStart.split(':');
 
-// console.log(checkLength("Chocolate", 10));
-// console.log(checkLength("Abrakadabra", 10));
+  const convertToMinutes = (hours, minutes) => hours * 60 + minutes;
+  const tranformToNumber = (time) => parseInt(time, 10);
 
-// 2) --- Palindrome
+  startHours = tranformToNumber(startHours);
+  startMinutes = tranformToNumber(startMinutes);
+  endHours = tranformToNumber(endHours);
+  endMinutes = tranformToNumber(endMinutes);
+  MeetStartHours = tranformToNumber(MeetStartHours);
+  MeetStartMinutes = tranformToNumber(MeetStartMinutes);
 
-const checkPalindrome = (string) => {
-  string = string.toLowerCase().replaceAll(' ', '');
-  let reverseString = '';
-  for (let i = string.length - 1; i >= 0; i--) {
-    reverseString += string[i];
-  }
-  return string === reverseString;
+  const MinutesWorkDayStart = convertToMinutes(startHours, startMinutes);
+  const MinutesWorkDayEnd = convertToMinutes(endHours, endMinutes);
+  const MinutesMeetStart = convertToMinutes(MeetStartHours, MeetStartMinutes);
+
+  const endMeetingTime = MinutesMeetStart + meetDuration;
+
+  return (
+    MinutesMeetStart >= MinutesWorkDayStart &&
+    MinutesMeetStart <= MinutesWorkDayEnd &&
+    endMeetingTime <= MinutesWorkDayEnd);
 };
 
-const checkPalindrome1 = (string) =>
-  string.toLowerCase().replaceAll(' ', '').split('').reverse().join('') ===
-  string;
-
-//1 - проверка результата (через цикл)
-// console.log(checkPalindrome('Т о п о Р '))
-// console.log(checkPalindrome('топот'))
-
-//2 - проверка результата (через массив)
-// console.log(checkPalindrome1('Т о п о Р '))
-// console.log(checkPalindrome1('топот'))
-
-// 3) --- проверяем числовые вхождения в строке / числе - возвращаем целое положительное число
-
-const getNumbers = (string) => {
-  if (typeof string === 'number') {
-    string = String(string);
-  }
-
-  let result = '';
-  string = string.replaceAll(/ /g, ''); //если replaceAll(' ', '') то ругается среда node.js. Среде браузера и тот и тот вариант ОК.
-  for (let value of string) {
-    value = +value;
-    !Number.isNaN(value) ? (result += value) : result;
-  }
-  return +result;
-};
-
-// console.log(getNumbers("1 кефир, 0.5 батона"));
-// console.log(getNumbers(-1.5));
+// console.log(checkMeet('08:00', '17:30', '14:00', 90)); // true
+// console.log(checkMeet('8:0', '10:0', '8:0', 120)); // true
+// console.log(checkMeet('08:00', '14:30', '14:00', 90)); // false
+// console.log(checkMeet('14:00', '17:30', '08:0', 90)); // false
+// console.log(checkMeet('8:00', '17:30', '08:00', 900)); // false
