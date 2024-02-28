@@ -18,4 +18,4 @@ const getRandomText = (text) => {
   return `${getRandomArrayElement(textArray)}.`;
 };
 
-export {getRandomInteger, getRandomArrayElement, getRandomId, getRandomText}
+export { getRandomInteger, getRandomArrayElement, getRandomId, getRandomText };
