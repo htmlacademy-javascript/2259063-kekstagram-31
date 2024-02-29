@@ -1,33 +1,5 @@
-const RANDOM_TEXT =
-  'Всё отлично! В целом всё неплохо, но не всё. Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально. Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше. Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше. Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!';
-
-const NAMES = [
-  'Alice',
-  'Bob',
-  'Charlie',
-  'David',
-  'Emily',
-  'Frank',
-  'Grace',
-  'Henry',
-  'Ivy',
-  'Jack',
-  'Katherine',
-  'Leo',
-  'Mia',
-  'Nathan',
-  'Olivia',
-  'Paul',
-  'Quinn',
-  'Rachel',
-  'Sam',
-  'Taylor',
-  'Ursula',
-  'Victor',
-  'Wendy',
-  'Xander',
-  'Yasmine',
-];
+import { getRandomId, getRandomArrayElement, getRandomInteger } from './util.js';
+import { addComment } from './comment/add-comment.js';
 
 const PHOTO_DESCRIPTIONS = [
   'Загадочный закат на горизонте.',
@@ -57,23 +29,18 @@ const PHOTO_DESCRIPTIONS = [
   'Граффити на стене с интересным сюжетом.',
 ];
 
-const MAX_USERS = 25;
 const MAX_LIKES = 200;
 const MIN_LIKES = 15;
-const MIN_COMMENTS = 0;
-const MAX_COMMENTS = 30;
-const MIN_AVATAR = 1;
-const MAX_AVATAR = 6;
 
-export {
-  RANDOM_TEXT,
-  NAMES,
-  PHOTO_DESCRIPTIONS,
-  MAX_USERS,
-  MAX_LIKES,
-  MIN_LIKES,
-  MIN_COMMENTS,
-  MAX_COMMENTS,
-  MIN_AVATAR,
-  MAX_AVATAR,
-};
+const getUserId = getRandomId();
+const getUserPhoto = getRandomId();
+
+const createPhoto = () => ({
+  id: getUserId(),
+  url: `photos/${getUserPhoto()}.jpg`,
+  description: getRandomArrayElement(PHOTO_DESCRIPTIONS),
+  likes: getRandomInteger(MIN_LIKES, MAX_LIKES),
+  comments: addComment(),
+});
+
+export { createPhoto };

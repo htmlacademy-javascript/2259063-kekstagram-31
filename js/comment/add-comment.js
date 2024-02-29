@@ -1,6 +1,9 @@
 import { createComment } from './create-comment.js';
-import { MIN_COMMENTS, MAX_COMMENTS } from './data.js';
-import { getRandomInteger } from './util';
+import { getRandomInteger } from '../util';
+
+
+const MIN_COMMENTS = 0;
+const MAX_COMMENTS = 30;
 
 const addComment = () =>
   Array.from(
