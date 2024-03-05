@@ -1,4 +1,4 @@
-import { addUser } from './add-user';
+import { addPicture } from './add-picture';
 
 // Вытаскиваем содержимое шаблона picture
 const pictureTemplate = document.querySelector('#picture')
@@ -9,7 +9,7 @@ const picturesContainer = document.querySelector('.pictures');
 
 const pictureListFragments = document.createDocumentFragment();
 
-const usersPictures = addUser();
+const usersPictures = addPicture();
 
 // перебираем полученный массив из результата выполнения функции usersPictures
 // и присваиваем результат перебора в переменную для экспорта
