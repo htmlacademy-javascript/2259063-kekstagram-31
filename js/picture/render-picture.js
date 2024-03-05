@@ -13,7 +13,7 @@ const usersPictures = addPicture();
 
 // перебираем полученный массив из результата выполнения функции usersPictures
 // и присваиваем результат перебора в переменную для экспорта
-const renderPictures = usersPictures.forEach(({url, description, likes, comments}) => {
+const renderPicture = usersPictures.forEach(({url, description, likes, comments}) => {
   // клонируем шаблон
   const newPicture = pictureTemplate.cloneNode(true);
 
@@ -36,4 +36,4 @@ const renderPictures = usersPictures.forEach(({url, description, likes, comments
   picturesContainer.append(pictureListFragments);
 });
 
-export {renderPictures};
+export {renderPicture};

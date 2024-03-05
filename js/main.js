@@ -1,2 +1,2 @@
-import { renderPictures } from './render-pictures';
+import { renderPicture } from './picture/render-picture';
 
