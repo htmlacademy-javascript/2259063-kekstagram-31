@@ -1,3 +1,2 @@
-import { addUser } from './add-user';
+import { renderPictures } from './render-pictures';
 
-// console.log(addUser());
