@@ -1,2 +1,3 @@
-import { renderPicture } from './picture/render-picture';
+/* eslint-disable no-unused-vars */
+import { renderPicutres } from './picture/render-pictures';
 
