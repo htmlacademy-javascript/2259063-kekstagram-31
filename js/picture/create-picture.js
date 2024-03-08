@@ -1,5 +1,5 @@
-import { getRandomId, getRandomArrayElement, getRandomInteger } from './util.js';
-import { addComment } from './comment/add-comment.js';
+import { getRandomId, getRandomArrayElement, getRandomInteger } from '../util';
+import { addComment } from '../comment/add-comment';
 
 const PHOTO_DESCRIPTIONS = [
   'Загадочный закат на горизонте.',
@@ -35,7 +35,7 @@ const MIN_LIKES = 15;
 const getUserId = getRandomId();
 const getUserPhoto = getRandomId();
 
-const createPhoto = () => ({
+const createPicture = () => ({
   id: getUserId(),
   url: `photos/${getUserPhoto()}.jpg`,
   description: getRandomArrayElement(PHOTO_DESCRIPTIONS),
@@ -43,4 +43,4 @@ const createPhoto = () => ({
   comments: addComment(),
 });
 
-export { createPhoto };
+export { createPicture };

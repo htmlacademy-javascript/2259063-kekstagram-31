@@ -1,4 +1,4 @@
-import { createComment } from './create-comment.js';
+import { createComment } from './create-comment';
 import { getRandomInteger } from '../util';
 
 

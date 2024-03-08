@@ -1,3 +1,3 @@
-import { addUser } from './add-user';
+/* eslint-disable no-unused-vars */
+import { renderPicutres } from './picture/render-pictures';
 
-// console.log(addUser());
