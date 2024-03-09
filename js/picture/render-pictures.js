@@ -29,4 +29,9 @@ usersPictures.forEach(({ url, description, likes, comments }) => {
 
 const renderPicutres = picturesContainer.append(pictureListFragments);
 
-export { renderPicutres };
+
+
+export { renderPicutres, picturesContainer, usersPictures};
+
+
+
