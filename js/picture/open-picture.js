@@ -1,61 +1,51 @@
-import { picturesContainer } from './picture/render-pictures';
-import { modalBigPicture, openModal } from './modal';
-// import { createCommentList } from './test2';
-// import { usersPictures } from './picture/render-pictures';
+import { picturesContainer } from './render-pictures';
+import { modalBigPicture, openModal } from '../modal';
+import { createCommentList } from '../comment/create-comment-list';
+import { usersPictures } from './render-pictures';
 
 const thumbnails = picturesContainer.querySelectorAll('.picture');
 const bigPicturePreviev = modalBigPicture.querySelector(
   '.big-picture__preview'
 );
+const commentsList = bigPicturePreviev.querySelector('.social__comments');
 
+// цикл на массиве данных по каждой миниатюре
 const openPicture = (gallery) => {
-  for (const thumbnail of gallery) {
+  for (let i = 0; i < gallery.length; i++) {
+    const thumbnail = gallery[i];
     const thumbnailImg = thumbnail.querySelector('img');
     const thumbnailUrl = thumbnailImg.src;
     const thumbnailAlt = thumbnailImg.alt;
-
     const thumbnailComments =
       thumbnail.querySelector('.picture__comments').textContent;
-
     const thumbnailLikes =
       thumbnail.querySelector('.picture__likes').textContent;
 
+    // обработчик на клик по миниатюре
     thumbnail.addEventListener('click', () => {
       openModal();
-
       const bigPictureImage = bigPicturePreviev
         .querySelector('.big-picture__img')
         .querySelector('img');
-      bigPictureImage.src = thumbnailUrl;
-      bigPictureImage.alt = thumbnailAlt;
-
       const bigPictureLikesCount =
         bigPicturePreviev.querySelector('.likes-count');
-      bigPictureLikesCount.textContent = thumbnailLikes;
-
       const bigPictureCommentsCount = bigPicturePreviev.querySelector(
         '.social__comment-total-count'
       );
-
-      bigPictureCommentsCount.textContent = thumbnailComments;
-
-
-
-      // for (const userPicture of usersPictures) {
-      //   const commentsArray = userPicture.comments;
-
-      //   console.log(createCommentList(commentsArray));
-      // }
-
-      const commentsList = bigPicturePreviev.querySelector('.social__comments');
-      //TODO вот сюда как-то надо передать результат создания списков комментариев
-      commentsList.append('контейнер с комментариями');
-
+      const commentsData = usersPictures[i].comments;
       const bigPictureDescription =
         bigPicturePreviev.querySelector('.social__caption');
+
+      bigPictureImage.src = thumbnailUrl;
+      bigPictureImage.alt = thumbnailAlt;
+      bigPictureLikesCount.textContent = thumbnailLikes;
+      bigPictureCommentsCount.textContent = thumbnailComments;
       bigPictureDescription.textContent = thumbnailAlt;
+      commentsList.append(createCommentList(commentsData));
     });
   }
 };
 
-openPicture(thumbnails);
+const fullSizeViewer = openPicture(thumbnails);
+
+export { commentsList, fullSizeViewer };
