@@ -28,5 +28,4 @@ const closeModal = () => {
 
 modalCloseButton.addEventListener('click', closeModal);
 
-// экспортирую само модальное окно и функцию его открытия в open-picture.js
 export { modalBigPicture, openModal, closeModal };
