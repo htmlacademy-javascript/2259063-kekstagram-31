@@ -1,7 +1,10 @@
 const showMoreComments = (commentList, interval, button, counter) => {
-  commentList.length < interval
-    ? (counter.textContent = commentList.length)
-    : (button.style.display = 'block');
+  if (commentList.length < interval) {
+    counter.textContent = commentList.length
+  } else {
+    button.style.display = 'block'
+  }
+
   for (let i = interval; i < commentList.length; i++) {
     commentList[i].style.display = 'none';
   }
