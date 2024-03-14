@@ -1,5 +1,3 @@
-import { commentsMoreButton, commentsList } from "../picture/open-picture";
-
 const SHOWED_COMMENTS_INTERVAL = 5;
 let isHandlerOn = false;
 
@@ -7,9 +5,9 @@ const showMoreComments = (commentList, inter, button, counter) => {
   let interval = inter;
   if (commentList.length <= interval) {
     counter.textContent = commentList.length;
-    button.classList.add("hidden");
+    button.classList.add('hidden');
   } else {
-    button.classList.remove("hidden");
+    button.classList.remove('hidden');
   }
 
   if (commentList.length > interval) {
@@ -25,14 +23,16 @@ const showMoreComments = (commentList, inter, button, counter) => {
     interval += 5;
     counter.textContent = interval;
     if (interval >= commentList.length) {
-      button.classList.add("hidden");
+      button.classList.add('hidden');
       interval = SHOWED_COMMENTS_INTERVAL;
       counter.textContent = commentList.length;
     }
     isHandlerOn = true;
   };
 
-  if (!isHandlerOn) button.addEventListener("click", ShowMoreCommentsHandler);
+  if (!isHandlerOn) {
+    button.addEventListener('click', ShowMoreCommentsHandler);
+  }
 };
 
 export { showMoreComments, SHOWED_COMMENTS_INTERVAL };
