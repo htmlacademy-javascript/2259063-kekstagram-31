@@ -1,4 +1,4 @@
-import { addPicture } from './picture/add-picture';
+import { PicturesDataArr } from './main';
 
 const pictureTemplate = document
   .querySelector('#picture')
@@ -8,9 +8,7 @@ const picturesContainer = document.querySelector('.pictures');
 
 const pictureListFragments = document.createDocumentFragment();
 
-const usersPictures = addPicture();
-
-usersPictures.forEach(({ url, description, likes, comments }) => {
+PicturesDataArr.forEach(({ url, description, likes, comments }) => {
   const newPicture = pictureTemplate.cloneNode(true);
 
   const pictureImg = newPicture.querySelector('.picture__img');
@@ -29,4 +27,4 @@ usersPictures.forEach(({ url, description, likes, comments }) => {
 
 const renderThumbnails = () => picturesContainer.append(pictureListFragments);
 
-export { renderThumbnails, picturesContainer, usersPictures };
+export { renderThumbnails, picturesContainer, PicturesDataArr };

@@ -1,4 +1,4 @@
-import { picturesContainer, usersPictures, renderPicutres } from './render-pictures';
+import { picturesContainer, PicturesDataArr, renderPicutres } from './render-pictures';
 import { modalBigPicture, openModal } from '../modal';
 import { createCommentList } from '../comment/create-comment-list';
 import { showMoreComments, SHOWED_COMMENTS_INTERVAL } from '../comment/show-more-comments';
@@ -30,7 +30,7 @@ const openPicture = (gallery) => {
     // обработчик на клик по миниатюре
     thumbnail.addEventListener('click', () => {
       openModal();
-      const defaultCounter = SHOWED_COMMENTS_INTERVAL
+      const defaultCounter = SHOWED_COMMENTS_INTERVAL;
       const bigPictureImage = bigPicturePreviev
         .querySelector('.big-picture__img')
         .querySelector('img');
@@ -43,7 +43,7 @@ const openPicture = (gallery) => {
       bigPicturePreviev.querySelector('.social__caption');
 
       // получение комментариев списка комментариев
-      const commentsData = usersPictures[index].comments;
+      const commentsData = PicturesDataArr[index].comments;
       const userComments = commentsList.children;
       bigPictureImage.src = thumbnailUrl;
       bigPictureImage.alt = thumbnailAlt;
