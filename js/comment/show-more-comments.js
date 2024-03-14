@@ -17,12 +17,15 @@ const showMoreComments = (commentList, defaultCounter, button, counter) => {
   }
 
   const ShowMoreCommentsHandler = () => {
-    console.log(interval)
-    for (let j = interval; j < interval + 5 && j < commentList.length; j++) {
+    const remainingComments = commentList.length - interval;
+    const commentsToShow = Math.min(5, remainingComments);
+
+    for (let j = interval; j < interval + commentsToShow; j++) {
       commentList[j].classList.remove('hidden');
     }
-    interval += 5;
+    interval += commentsToShow;
     counter.textContent = interval;
+
     if (interval >= commentList.length) {
       button.classList.add('hidden');
       interval = SHOWED_COMMENTS_INTERVAL;
