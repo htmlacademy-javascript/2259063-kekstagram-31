@@ -37,11 +37,12 @@ const openPicture = (gallery) => {
       const bigPictureCommentsCount = bigPicturePreviev.querySelector(
         '.social__comment-total-count'
       );
-      const commentsData = usersPictures[index].comments;
       const bigPictureDescription =
-        bigPicturePreviev.querySelector('.social__caption');
-      const userComments = commentsList.children;
+      bigPicturePreviev.querySelector('.social__caption');
 
+      // получение комментариев списка комментариев
+      const commentsData = usersPictures[index].comments;
+      const userComments = commentsList.children;
       bigPictureImage.src = thumbnailUrl;
       bigPictureImage.alt = thumbnailAlt;
       bigPictureLikesCount.textContent = thumbnailLikes;
