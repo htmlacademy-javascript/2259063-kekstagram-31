@@ -12,7 +12,7 @@ const bigPicturePreviev = modalBigPicture.querySelector(
 );
 const commentsList = bigPicturePreviev.querySelector('.social__comments');
 const commentsMoreButton = bigPicturePreviev.querySelector('.comments-loader');
-commentsMoreButton.style.display = 'none';
+commentsMoreButton.classList.add('hidden');
 const commentsShowCount = bigPicturePreviev.querySelector(
   '.social__comment-shown-count'
 );
