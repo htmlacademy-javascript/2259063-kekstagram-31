@@ -7,6 +7,7 @@ const SHOWED_COMMENTS_INTERVAL = 5;
 const showMoreComments = (commentList, interval, button, counter) => {
   if (commentList.length < interval) {
     counter.textContent = commentList.length;
+    button.style.display = 'none';
   } else {
     button.style.display = "block";
   }
@@ -30,28 +31,6 @@ const showMoreComments = (commentList, interval, button, counter) => {
   };
 
   button.addEventListener("click", ShowMoreCommentsHandler);
-
-  const closeModal = () => {
-    commentsList.innerHTML = "";
-
-    modalBigPicture.classList.add("hidden");
-    document.body.classList.remove("modal-open");
-
-    document.removeEventListener("keydown", keyDownHandler);
-    button.removeEventListener("click", ShowMoreCommentsHandler);
-  };
-
-  // button.addEventListener('click', () => {
-  //   for (let j = interval; j < interval + 5 && j < commentList.length; j++) {
-  //     commentList[j].style.display = 'flex';
-  //   }
-  //   interval += 5;
-  //   counter.textContent = interval;
-  //   if (interval >= commentList.length) {
-  //     button.style.display = 'none';
-  //     counter.textContent = commentList.length;
-  //   }
-  // });
 };
 
 export { showMoreComments, SHOWED_COMMENTS_INTERVAL };
