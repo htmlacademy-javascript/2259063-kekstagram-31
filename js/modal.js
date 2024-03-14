@@ -4,6 +4,8 @@ import {
   commentsShowCount,
 } from './picture/open-picture';
 
+
+
 const modalBigPicture = document.querySelector('.big-picture');
 const modalCloseButton = modalBigPicture.querySelector('.cancel');
 
@@ -27,7 +29,7 @@ const closeModal = () => {
 
   document.removeEventListener('keydown', keyDownHandler);
 
-  //удалить обработчик событий на button show more
+
 };
 
 function keyDownHandler(evt) {
@@ -38,4 +40,4 @@ function keyDownHandler(evt) {
 
 modalCloseButton.addEventListener('click', closeModal);
 
-export { modalBigPicture, openModal, closeModal };
+export { modalBigPicture, openModal, closeModal, keyDownHandler };

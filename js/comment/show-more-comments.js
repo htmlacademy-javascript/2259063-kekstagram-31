@@ -1,8 +1,6 @@
-import {
-  commentsMoreButton,
-  commentsShowCount,
-  commentsList,
-} from "../picture/open-picture";
+import { commentsMoreButton, commentsList } from "../picture/open-picture";
+
+import { keyDownHandler, modalBigPicture } from "../modal";
 
 const SHOWED_COMMENTS_INTERVAL = 5;
 
@@ -32,6 +30,16 @@ const showMoreComments = (commentList, interval, button, counter) => {
   };
 
   button.addEventListener("click", ShowMoreCommentsHandler);
+
+  const closeModal = () => {
+    commentsList.innerHTML = "";
+
+    modalBigPicture.classList.add("hidden");
+    document.body.classList.remove("modal-open");
+
+    document.removeEventListener("keydown", keyDownHandler);
+    button.removeEventListener("click", ShowMoreCommentsHandler);
+  };
 
   // button.addEventListener('click', () => {
   //   for (let j = interval; j < interval + 5 && j < commentList.length; j++) {
