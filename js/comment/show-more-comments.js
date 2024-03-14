@@ -1,13 +1,15 @@
 import { commentsMoreButton, commentsList } from "../picture/open-picture";
 
-import { keyDownHandler, modalBigPicture } from "../modal";
+// import { keyDownHandler, modalBigPicture } from "../modal";
 
 const SHOWED_COMMENTS_INTERVAL = 5;
+let isHandlerOn = false;
 
-const showMoreComments = (commentList, interval, button, counter) => {
+const showMoreComments = (commentList, inter, button, counter) => {
+  let interval = inter;
   if (commentList.length < interval) {
     counter.textContent = commentList.length;
-    button.style.display = 'none';
+    button.style.display = "none";
   } else {
     button.style.display = "block";
   }
@@ -19,6 +21,7 @@ const showMoreComments = (commentList, interval, button, counter) => {
   }
 
   const ShowMoreCommentsHandler = () => {
+    console.log(interval);
     for (let j = interval; j < interval + 5 && j < commentList.length; j++) {
       commentList[j].style.display = "flex";
     }
@@ -26,11 +29,13 @@ const showMoreComments = (commentList, interval, button, counter) => {
     counter.textContent = interval;
     if (interval >= commentList.length) {
       commentsMoreButton.style.display = "none";
+      interval = SHOWED_COMMENTS_INTERVAL;
       counter.textContent = commentList.length;
     }
+    isHandlerOn = true;
   };
 
-  button.addEventListener("click", ShowMoreCommentsHandler);
+  if (!isHandlerOn) button.addEventListener("click", ShowMoreCommentsHandler);
 };
 
 export { showMoreComments, SHOWED_COMMENTS_INTERVAL };

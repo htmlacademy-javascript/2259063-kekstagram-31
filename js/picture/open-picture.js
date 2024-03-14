@@ -30,6 +30,7 @@ const openPicture = (gallery) => {
     // обработчик на клик по миниатюре
     thumbnail.addEventListener('click', () => {
       openModal();
+      const defaultCounter = SHOWED_COMMENTS_INTERVAL
       const bigPictureImage = bigPicturePreviev
         .querySelector('.big-picture__img')
         .querySelector('img');
@@ -52,7 +53,7 @@ const openPicture = (gallery) => {
       commentsList.append(createCommentList(commentsData));
 
       // функция для показа большего кол-ва комментариев
-      showMoreComments(userComments, SHOWED_COMMENTS_INTERVAL, commentsMoreButton, commentsShowCount);
+      showMoreComments(userComments, defaultCounter, commentsMoreButton, commentsShowCount);
     });
   });
 };
