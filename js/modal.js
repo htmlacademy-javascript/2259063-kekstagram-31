@@ -2,15 +2,15 @@
 import {
   commentsList,
   commentsShowCount,
-} from "./picture/open-picture";
+} from './picture/open-picture';
 
-const modalBigPicture = document.querySelector(".big-picture");
-const modalCloseButton = modalBigPicture.querySelector(".cancel");
+const modalBigPicture = document.querySelector('.big-picture');
+const modalCloseButton = modalBigPicture.querySelector('.cancel');
 
 const openModal = () => {
-  modalBigPicture.classList.remove("hidden");
-  document.body.classList.add("modal-open");
-  document.addEventListener("keydown", keyDownHandler);
+  modalBigPicture.classList.remove('hidden');
+  document.body.classList.add('modal-open');
+  document.addEventListener('keydown', keyDownHandler);
 
   if (commentsList.length < 5) {
     commentsShowCount.textContent = commentsList.length;
@@ -20,22 +20,22 @@ const openModal = () => {
 };
 
 const closeModal = () => {
-  commentsList.innerHTML = "";
+  commentsList.innerHTML = '';
 
-  modalBigPicture.classList.add("hidden");
-  document.body.classList.remove("modal-open");
+  modalBigPicture.classList.add('hidden');
+  document.body.classList.remove('modal-open');
 
-  document.removeEventListener("keydown", keyDownHandler);
+  document.removeEventListener('keydown', keyDownHandler);
 
   //удалить обработчик событий на button show more
 };
 
 function keyDownHandler(evt) {
-  if (evt.key === "Escape") {
+  if (evt.key === 'Escape') {
     closeModal();
   }
 }
 
-modalCloseButton.addEventListener("click", closeModal);
+modalCloseButton.addEventListener('click', closeModal);
 
 export { modalBigPicture, openModal, closeModal };

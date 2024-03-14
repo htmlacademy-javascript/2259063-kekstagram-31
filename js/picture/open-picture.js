@@ -1,9 +1,10 @@
 import { picturesContainer, usersPictures, renderPicutres } from './render-pictures';
 import { modalBigPicture, openModal } from '../modal';
 import { createCommentList } from '../comment/create-comment-list';
-import { showMoreComments } from '../comment/show-more-comments';
+import { showMoreComments, SHOWED_COMMENTS_INTERVAL } from '../comment/show-more-comments';
 
-renderPicutres()
+
+renderPicutres();
 
 const thumbnails = picturesContainer.querySelectorAll('.picture');
 const bigPicturePreviev = modalBigPicture.querySelector(
@@ -51,11 +52,11 @@ const openPicture = (gallery) => {
       commentsList.append(createCommentList(commentsData));
 
       // функция для показа большего кол-ва комментариев
-      showMoreComments(userComments, 5, commentsMoreButton, commentsShowCount);
+      showMoreComments(userComments, SHOWED_COMMENTS_INTERVAL, commentsMoreButton, commentsShowCount);
     });
   });
 };
 
 const fullSizeViewer = () => openPicture(thumbnails);
 
-export { commentsList, fullSizeViewer, commentsShowCount };
+export { commentsList, fullSizeViewer, commentsShowCount, commentsMoreButton };

@@ -1,3 +1,11 @@
+import {
+  commentsMoreButton,
+  commentsShowCount,
+  commentsList,
+} from "../picture/open-picture";
+
+const SHOWED_COMMENTS_INTERVAL = 5;
+
 const showMoreComments = (commentList, interval, button, counter) => {
   if (commentList.length < interval) {
     counter.textContent = commentList.length;
@@ -11,17 +19,31 @@ const showMoreComments = (commentList, interval, button, counter) => {
     }
   }
 
-  button.addEventListener("click", () => {
+  const ShowMoreCommentsHandler = () => {
     for (let j = interval; j < interval + 5 && j < commentList.length; j++) {
       commentList[j].style.display = "flex";
     }
     interval += 5;
     counter.textContent = interval;
     if (interval >= commentList.length) {
-      button.style.display = "none";
+      commentsMoreButton.style.display = "none";
       counter.textContent = commentList.length;
     }
-  });
+  };
+
+  button.addEventListener("click", ShowMoreCommentsHandler);
+
+  // button.addEventListener('click', () => {
+  //   for (let j = interval; j < interval + 5 && j < commentList.length; j++) {
+  //     commentList[j].style.display = 'flex';
+  //   }
+  //   interval += 5;
+  //   counter.textContent = interval;
+  //   if (interval >= commentList.length) {
+  //     button.style.display = 'none';
+  //     counter.textContent = commentList.length;
+  //   }
+  // });
 };
 
-export { showMoreComments };
+export { showMoreComments, SHOWED_COMMENTS_INTERVAL };
