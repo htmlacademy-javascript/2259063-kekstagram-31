@@ -1,10 +1,4 @@
-// имопртирую для того чтобы на closeModal() очищать список комментариев
-import {
-  commentsList,
-  commentsShowCount,
-} from './picture/open-picture';
-
-
+import { commentsShowCount, commentsList } from './picture/open-picture';
 
 const modalBigPicture = document.querySelector('.big-picture');
 const modalCloseButton = modalBigPicture.querySelector('.cancel');
@@ -28,8 +22,6 @@ const closeModal = () => {
   document.body.classList.remove('modal-open');
 
   document.removeEventListener('keydown', keyDownHandler);
-
-
 };
 
 function keyDownHandler(evt) {

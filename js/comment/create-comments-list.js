@@ -4,7 +4,7 @@ const commentTemplate = document
 const commentsListFragment = document.createDocumentFragment();
 
 // функция для создания списка комментариев которые потом нужно будет вставлять
-const createCommentList = (commentArray) => {
+const createCommentsList = (commentArray) => {
   commentArray.forEach((comment) => {
     // создаю новый комментарий и нужно в него загонять инф из массива
     const newComment = commentTemplate.cloneNode(true);
@@ -22,4 +22,4 @@ const createCommentList = (commentArray) => {
   return commentsListFragment;
 };
 
-export { createCommentList };
+export { createCommentsList };

@@ -1,12 +1,10 @@
-import { picturesContainer, PicturesDataArr, renderPicutres } from './render-pictures';
 import { modalBigPicture, openModal } from '../modal';
-import { createCommentList } from '../comment/create-comment-list';
-import { showMoreComments, SHOWED_COMMENTS_INTERVAL } from '../comment/show-more-comments';
+import { renderComments } from '../comment/render-comments';
+import {
+  showMoreComments,
+  SHOWED_COMMENTS_INTERVAL,
+} from '../comment/show-more-comments';
 
-
-renderPicutres();
-
-const thumbnails = picturesContainer.querySelectorAll('.picture');
 const bigPicturePreviev = modalBigPicture.querySelector(
   '.big-picture__preview'
 );
@@ -16,8 +14,9 @@ commentsMoreButton.classList.add('hidden');
 const commentsShowCount = bigPicturePreviev.querySelector(
   '.social__comment-shown-count'
 );
-// цикл на массиве данных по каждой миниатюре
-const openPicture = (gallery) => {
+
+const openPicture = (gallery, dataArr) => {
+  gallery = gallery.querySelectorAll('.picture');
   gallery.forEach((thumbnail, index) => {
     const thumbnailImg = thumbnail.querySelector('img');
     const thumbnailUrl = thumbnailImg.src;
@@ -40,24 +39,34 @@ const openPicture = (gallery) => {
         '.social__comment-total-count'
       );
       const bigPictureDescription =
-      bigPicturePreviev.querySelector('.social__caption');
+        bigPicturePreviev.querySelector('.social__caption');
 
-      // получение комментариев списка комментариев
-      const commentsData = PicturesDataArr[index].comments;
-      const userComments = commentsList.children;
       bigPictureImage.src = thumbnailUrl;
       bigPictureImage.alt = thumbnailAlt;
       bigPictureLikesCount.textContent = thumbnailLikes;
       bigPictureCommentsCount.textContent = thumbnailComments;
       bigPictureDescription.textContent = thumbnailAlt;
-      commentsList.append(createCommentList(commentsData));
 
+      const userComments = renderComments(
+        dataArr,
+        index,
+        commentsList
+      ).children;
       // функция для показа большего кол-ва комментариев
-      showMoreComments(userComments, defaultCounter, commentsMoreButton, commentsShowCount);
+      showMoreComments(
+        userComments,
+        defaultCounter,
+        commentsMoreButton,
+        commentsShowCount
+      );
     });
   });
 };
 
-const fullSizeViewer = () => openPicture(thumbnails);
-
-export { commentsList, fullSizeViewer, commentsShowCount, commentsMoreButton };
+export {
+  commentsShowCount,
+  commentsMoreButton,
+  openPicture,
+  bigPicturePreviev,
+  commentsList,
+};
