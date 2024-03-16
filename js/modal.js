@@ -17,10 +17,8 @@ const openModal = () => {
 
 const closeModal = () => {
   commentsList.innerHTML = '';
-
   modalBigPicture.classList.add('hidden');
   document.body.classList.remove('modal-open');
-
   document.removeEventListener('keydown', keyDownHandler);
 };
 

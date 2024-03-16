@@ -1,9 +1,4 @@
-import {
-  getRandomId,
-  getRandomInteger,
-  getRandomText,
-  getRandomArrayElement,
-} from '../util.js';
+import { getRandomId, getRandomInteger, getRandomText, getRandomArrayElement, } from '../util.js';
 
 const MIN_AVATAR = 1;
 const MAX_AVATAR = 6;
