@@ -1,4 +1,4 @@
-import { modalBigPicture, openModal } from '../modal';
+import { modalBigPicture, openModalBigPicture } from './picture-modal';
 import { renderComments } from '../comment/render-comments';
 import { showMoreComments, SHOWED_COMMENTS_INTERVAL } from '../comment/show-more-comments';
 
@@ -18,7 +18,7 @@ const openPicture = (gallery, dataArr) => {
 
     // обработчик на клик по миниатюре
     thumbnail.addEventListener('click', () => {
-      openModal();
+      openModalBigPicture();
       const defaultCounter = SHOWED_COMMENTS_INTERVAL;
       const bigPictureImage = bigPicturePreviev.querySelector('.big-picture__img img');
       const bigPictureLikesCount = bigPicturePreviev.querySelector('.likes-count');

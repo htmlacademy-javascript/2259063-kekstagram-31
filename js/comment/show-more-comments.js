@@ -1,8 +1,8 @@
 const SHOWED_COMMENTS_INTERVAL = 5;
 let isHandlerOn = false;
 
-const showMoreComments = (commentList, defaultCounter, button, counter) => {
-  let interval = defaultCounter;
+const showMoreComments = (commentList, interval, button, counter) => {
+  let commentsToShow = interval;
   if (commentList.length <= interval) {
     counter.textContent = commentList.length;
     button.classList.add('hidden');
@@ -17,25 +17,28 @@ const showMoreComments = (commentList, defaultCounter, button, counter) => {
   }
 
   const ShowMoreCommentsHandler = () => {
-    const remainingComments = commentList.length - interval;
-    const commentsToShow = Math.min(5, remainingComments);
+    const showedCount = document.querySelectorAll('.social__comment:not(.hidden)').length;
+    if (commentsToShow > showedCount) {
+      commentsToShow = interval;
+    }
 
-    for (let j = interval; j < interval + commentsToShow; j++) {
+    const maxCountComments = Math.min(commentList.length, commentsToShow + interval);
+    for (let j = commentsToShow; j < maxCountComments; j++) {
       commentList[j].classList.remove('hidden');
     }
-    interval += commentsToShow;
-    counter.textContent = interval;
-
-    if (interval >= commentList.length) {
+    if (maxCountComments === commentList.length) {
       button.classList.add('hidden');
-      interval = SHOWED_COMMENTS_INTERVAL;
-      counter.textContent = commentList.length;
+      commentsToShow = interval;
+    } else {
+      commentsToShow += interval;
     }
-    isHandlerOn = true;
+
+    counter.textContent = maxCountComments;
   };
 
   if (!isHandlerOn) {
     button.addEventListener('click', ShowMoreCommentsHandler);
+    isHandlerOn = true;
   }
 };
 
