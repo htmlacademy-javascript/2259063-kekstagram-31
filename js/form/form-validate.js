@@ -13,6 +13,13 @@ false
 
 const inputHashtag = uploadForm.querySelector('#hashtags');
 
+inputHashtag.addEventListener('keydown', (evt) => {
+  if (evt.key === 'Escape') {
+    evt.stopPropagation();
+    inputHashtag.blur();
+  }
+})
+
 const validateHashtagsFormat = (value) => {
   const hashtags = value.split(' ');
   const regex = /^#[a-zA-Z0-9]{1,19}$/;
