@@ -8,22 +8,37 @@ const pristine = new Pristine(uploadForm, {
   errorTextTag: 'div',
   errorTextClass: 'pristine-error'
 },
-false
+  false
 );
 
 const inputHashtag = uploadForm.querySelector('#hashtags');
+const inputDescription = uploadForm.querySelector('#description');
 
-inputHashtag.addEventListener('keydown', (evt) => {
+function uploadFormInputsKeyDownHandler(evt, input) {
   if (evt.key === 'Escape') {
     evt.stopPropagation();
-    inputHashtag.blur();
+    input.blur();
   }
-})
+}
+
+inputHashtag.addEventListener('keydown', (evt) => {
+  uploadFormInputsKeyDownHandler(evt, inputHashtag);
+});
+
+inputDescription.addEventListener('keydown', (evt) => {
+  uploadFormInputsKeyDownHandler(evt, inputDescription);
+});
+
+const validateDescriptionPresence = (value) => value.trim() === '';
 
 const validateHashtagsFormat = (value) => {
-  const hashtags = value.split(' ');
-  const regex = /^#[a-zA-Z0-9]{1,19}$/;
-  return hashtags.every((tag) => regex.test(tag));
+  if (value.trim() === '') {
+    return true;
+  } else {
+    const hashtags = value.split(' ');
+    const regex = /^#[a-zA-Z0-9]{1,19}$/;
+    return hashtags.every((tag) => regex.test(tag));
+  }
 };
 
 const validateHashtagsCount = (value) => {
@@ -37,12 +52,15 @@ const validateHashtagsUnique = (value) => {
   return hashtags.length === uniqueHashtags.size;
 };
 
+const validateDescriptionLength = (value) => value.length <= 140;
+
 pristine.addValidator(inputHashtag, validateHashtagsFormat, 'Хэштег должен начинаться с символа # и содержать только буквы и цифры, длиной от 1 до 20 символов (включая #)');
 pristine.addValidator(inputHashtag, validateHashtagsCount, 'Максимальное количество хэштегов - 5');
 pristine.addValidator(inputHashtag, validateHashtagsUnique, 'Имеются повторяющиеся хэштеги');
+pristine.addValidator(inputDescription, validateDescriptionLength, 'Превышено максимальное кол-во символов - 140');
 
 uploadForm.addEventListener('submit', (evt) => {
-  if (!pristine.validate()) {
+  if (!pristine.validate() || !validateDescriptionPresence(inputDescription.value)) {
     evt.preventDefault();
   }
 });

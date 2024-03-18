@@ -1,4 +1,3 @@
-// import { fullSizeViewer } from './picture/open-picture';
 import { addPictures } from './picture/add-picture';
 import { renderPicutres } from './picture/render-pictures';
 import { openPicture } from './picture/open-picture';

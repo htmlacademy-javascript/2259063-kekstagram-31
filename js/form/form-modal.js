@@ -1,6 +1,6 @@
 const uploadPictureInput = document.querySelector('.img-upload__input');
 const uploadPictureOverlay = document.querySelector('.img-upload__overlay');
-const uploadOverlaycloseButton = uploadPictureOverlay.querySelector('.img-upload__cancel')
+const uploadOverlaycloseButton = uploadPictureOverlay.querySelector('.img-upload__cancel');
 
 const uploadPictureHandler = () => {
   uploadPictureOverlay.classList.remove('hidden');
