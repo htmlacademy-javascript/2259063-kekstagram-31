@@ -1,63 +1,41 @@
-import { picturesContainer, PicturesDataArr, renderPicutres } from './render-pictures';
-import { modalBigPicture, openModal } from '../modal';
-import { createCommentList } from '../comment/create-comment-list';
+import { modalBigPicture, openModalBigPicture } from './picture-modal';
+import { renderComments } from '../comment/render-comments';
 import { showMoreComments, SHOWED_COMMENTS_INTERVAL } from '../comment/show-more-comments';
 
-
-renderPicutres();
-
-const thumbnails = picturesContainer.querySelectorAll('.picture');
-const bigPicturePreviev = modalBigPicture.querySelector(
-  '.big-picture__preview'
-);
+const bigPicturePreviev = modalBigPicture.querySelector('.big-picture__preview');
 const commentsList = bigPicturePreviev.querySelector('.social__comments');
 const commentsMoreButton = bigPicturePreviev.querySelector('.comments-loader');
 commentsMoreButton.classList.add('hidden');
-const commentsShowCount = bigPicturePreviev.querySelector(
-  '.social__comment-shown-count'
-);
-// цикл на массиве данных по каждой миниатюре
-const openPicture = (gallery) => {
+const commentsShowCount = bigPicturePreviev.querySelector('.social__comment-shown-count');
+
+const openPicture = (gallery, dataArr) => {
+  gallery = gallery.querySelectorAll('.picture');
   gallery.forEach((thumbnail, index) => {
-    const thumbnailImg = thumbnail.querySelector('img');
-    const thumbnailUrl = thumbnailImg.src;
-    const thumbnailAlt = thumbnailImg.alt;
-    const thumbnailComments =
-      thumbnail.querySelector('.picture__comments').textContent;
-    const thumbnailLikes =
-      thumbnail.querySelector('.picture__likes').textContent;
+    const thumbnailUrl = thumbnail.querySelector('img').src;
+    const thumbnailAlt = thumbnail.querySelector('img').alt;
+    const thumbnailComments = thumbnail.querySelector('.picture__comments').textContent;
+    const thumbnailLikes = thumbnail.querySelector('.picture__likes').textContent;
 
     // обработчик на клик по миниатюре
     thumbnail.addEventListener('click', () => {
-      openModal();
+      openModalBigPicture();
       const defaultCounter = SHOWED_COMMENTS_INTERVAL;
-      const bigPictureImage = bigPicturePreviev
-        .querySelector('.big-picture__img')
-        .querySelector('img');
-      const bigPictureLikesCount =
-        bigPicturePreviev.querySelector('.likes-count');
-      const bigPictureCommentsCount = bigPicturePreviev.querySelector(
-        '.social__comment-total-count'
-      );
-      const bigPictureDescription =
-      bigPicturePreviev.querySelector('.social__caption');
+      const bigPictureImage = bigPicturePreviev.querySelector('.big-picture__img img');
+      const bigPictureLikesCount = bigPicturePreviev.querySelector('.likes-count');
+      const bigPictureCommentsCount = bigPicturePreviev.querySelector('.social__comment-total-count');
+      const bigPictureDescription = bigPicturePreviev.querySelector('.social__caption');
 
-      // получение комментариев списка комментариев
-      const commentsData = PicturesDataArr[index].comments;
-      const userComments = commentsList.children;
       bigPictureImage.src = thumbnailUrl;
       bigPictureImage.alt = thumbnailAlt;
       bigPictureLikesCount.textContent = thumbnailLikes;
       bigPictureCommentsCount.textContent = thumbnailComments;
       bigPictureDescription.textContent = thumbnailAlt;
-      commentsList.append(createCommentList(commentsData));
 
-      // функция для показа большего кол-ва комментариев
+      const userComments = renderComments(dataArr, index, commentsList).children;
+
       showMoreComments(userComments, defaultCounter, commentsMoreButton, commentsShowCount);
     });
   });
 };
 
-const fullSizeViewer = () => openPicture(thumbnails);
-
-export { commentsList, fullSizeViewer, commentsShowCount, commentsMoreButton };
+export { commentsShowCount, commentsMoreButton, openPicture, bigPicturePreviev, commentsList, };

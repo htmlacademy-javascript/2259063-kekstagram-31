@@ -19,6 +19,3 @@ const getRandomText = (text) => {
 };
 
 export { getRandomInteger, getRandomArrayElement, getRandomId, getRandomText};
-
-
-
