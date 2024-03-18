@@ -1,5 +1,8 @@
-const uploadForm = document.querySelector('.img-upload__form');
+const HASHTAGS_MAX_VALUE = 5;
+const DESCRIPTION_MAX_LENGTH = 140;
+const REGEXP_HASHTAG_FORMAT = /^#[a-zа-яё0-9]{1,19}$/i;
 
+const uploadForm = document.querySelector('.img-upload__form');
 const pristine = new Pristine(uploadForm, {
   classTo: 'img-upload__field-wrapper',
   errorClass: 'img-upload__field-wrapper--error',
@@ -10,7 +13,6 @@ const pristine = new Pristine(uploadForm, {
 },
 false
 );
-
 const inputHashtag = uploadForm.querySelector('#hashtags');
 const inputDescription = uploadForm.querySelector('#description');
 
@@ -36,23 +38,22 @@ const validateHashtagsFormat = (value) => {
     return true;
   } else {
     const hashtags = value.split(' ');
-    const regex = /^#[a-zа-яё0-9]{1,19}$/i;
-    return hashtags.every((tag) => regex.test(tag));
+    return hashtags.every((tag) => REGEXP_HASHTAG_FORMAT.test(tag));
   }
 };
 
 const validateHashtagsCount = (value) => {
-  const hashtags = value.split(' ');
-  return hashtags.length <= 5;
+  const hashtags = value.split(' ').filter((tag) => tag.trim() !== '');
+  return hashtags.length <= HASHTAGS_MAX_VALUE;
 };
 
 const validateHashtagsUnique = (value) => {
-  const hashtags = value.split(' ');
+  const hashtags = value.split(' ').filter((tag) => tag.trim() !== '');
   const uniqueHashtags = new Set(hashtags.map((tag) => tag.toLowerCase()));
   return hashtags.length === uniqueHashtags.size;
 };
 
-const validateDescriptionLength = (value) => value.length <= 140;
+const validateDescriptionLength = (value) => value.length <= DESCRIPTION_MAX_LENGTH;
 
 pristine.addValidator(inputHashtag, validateHashtagsFormat, 'Хэштег должен начинаться с символа # и содержать только буквы и цифры, длиной от 1 до 20 символов (включая #)');
 pristine.addValidator(inputHashtag, validateHashtagsCount, 'Максимальное количество хэштегов - 5');
