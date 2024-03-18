@@ -8,7 +8,7 @@ const pristine = new Pristine(uploadForm, {
   errorTextTag: 'div',
   errorTextClass: 'pristine-error'
 },
-  false
+false
 );
 
 const inputHashtag = uploadForm.querySelector('#hashtags');
@@ -36,7 +36,7 @@ const validateHashtagsFormat = (value) => {
     return true;
   } else {
     const hashtags = value.split(' ');
-    const regex = /^#[a-zA-Z0-9]{1,19}$/;
+    const regex = /^#[a-zA-Zа-яА-ЯёЁ0-9]{1,19}$/;
     return hashtags.every((tag) => regex.test(tag));
   }
 };
