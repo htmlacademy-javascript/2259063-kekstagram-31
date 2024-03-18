@@ -36,7 +36,7 @@ const validateHashtagsFormat = (value) => {
     return true;
   } else {
     const hashtags = value.split(' ');
-    const regex = /^#[a-zA-Zа-яА-ЯёЁ0-9]{1,19}$/;
+    const regex = /^#[a-zа-яё0-9]{1,19}$/i;
     return hashtags.every((tag) => regex.test(tag));
   }
 };
