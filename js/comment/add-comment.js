@@ -1,7 +1,6 @@
 import { createComment } from './create-comment';
 import { getRandomInteger } from '../util';
 
-
 const MIN_COMMENTS = 0;
 const MAX_COMMENTS = 30;
 
