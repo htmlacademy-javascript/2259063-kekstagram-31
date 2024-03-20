@@ -37,3 +37,4 @@ function uploadPictureKeyDownHandler(evt) {
 uploadPictureInput.addEventListener('change', uploadPictureHandler);
 uploadOverlaycloseButton.addEventListener('click', closeUploadPictureOverlay);
 
+export { uploadPicturePreviev }
