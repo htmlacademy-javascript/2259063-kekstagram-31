@@ -1,3 +1,6 @@
+import { submitEventHandler, uploadForm } from './form-validate';
+import { removeScaleEventHandlers } from './form-scale';
+
 const uploadPictureInput = document.querySelector('.img-upload__input');
 const uploadPictureOverlay = document.querySelector('.img-upload__overlay');
 const uploadOverlaycloseButton = uploadPictureOverlay.querySelector('.img-upload__cancel');
@@ -26,6 +29,8 @@ const closeUploadPictureOverlay = () => {
   uploadPictureOverlay.classList.add('hidden');
   document.body.classList.remove('modal-open');
   document.removeEventListener('keydown', uploadPictureKeyDownHandler);
+  uploadForm.removeEventListener('submit', submitEventHandler);
+  removeScaleEventHandlers();
 };
 
 function uploadPictureKeyDownHandler(evt) {
@@ -37,4 +42,4 @@ function uploadPictureKeyDownHandler(evt) {
 uploadPictureInput.addEventListener('change', uploadPictureHandler);
 uploadOverlaycloseButton.addEventListener('click', closeUploadPictureOverlay);
 
-export { uploadPicturePreviev }
+export { uploadPicturePreviev };

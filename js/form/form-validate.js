@@ -60,8 +60,18 @@ pristine.addValidator(inputHashtag, validateHashtagsCount, 'Максимальн
 pristine.addValidator(inputHashtag, validateHashtagsUnique, 'Имеются повторяющиеся хэштеги');
 pristine.addValidator(inputDescription, validateDescriptionLength, 'Превышено максимальное кол-во символов - 140');
 
-uploadForm.addEventListener('submit', (evt) => {
+const submitEventHandler = (evt) => {
   if (!pristine.validate() || !validateDescriptionPresence(inputDescription.value)) {
     evt.preventDefault();
   }
-});
+};
+
+uploadForm.addEventListener('submit', submitEventHandler);
+
+export {submitEventHandler, uploadForm};
+
+// uploadForm.addEventListener('submit', (evt) => {
+//   if (!pristine.validate() || !validateDescriptionPresence(inputDescription.value)) {
+//     evt.preventDefault();
+//   }
+// });
