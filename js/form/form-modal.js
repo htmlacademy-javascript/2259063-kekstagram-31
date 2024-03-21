@@ -1,5 +1,5 @@
-import { submitEventHandler, uploadForm } from './form-validate';
-import { removeScaleEventHandlers } from './form-scale';
+import { addUploadFormEventHandler, removeUploadFormEventHandler } from './form-validate';
+import { removeScaleEventHandlers, addScaleEventHandlers } from './form-scale';
 
 const uploadPictureInput = document.querySelector('.img-upload__input');
 const uploadPictureOverlay = document.querySelector('.img-upload__overlay');
@@ -11,6 +11,8 @@ const uploadPictureHandler = () => {
   uploadPictureOverlay.classList.remove('hidden');
   document.body.classList.add('modal-open');
   document.addEventListener('keydown', uploadPictureKeyDownHandler);
+  addScaleEventHandlers();
+  addUploadFormEventHandler();
 
   // загрузка изображений
   if (uploadPictureInput.files && uploadPictureInput.files[0]) {
@@ -29,7 +31,7 @@ const closeUploadPictureOverlay = () => {
   uploadPictureOverlay.classList.add('hidden');
   document.body.classList.remove('modal-open');
   document.removeEventListener('keydown', uploadPictureKeyDownHandler);
-  uploadForm.removeEventListener('submit', submitEventHandler);
+  removeUploadFormEventHandler();
   removeScaleEventHandlers();
 };
 

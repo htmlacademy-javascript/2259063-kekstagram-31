@@ -65,13 +65,12 @@ const submitEventHandler = (evt) => {
     evt.preventDefault();
   }
 };
+const addUploadFormEventHandler = () => {
+  uploadForm.addEventListener('submit', submitEventHandler);
+};
 
-uploadForm.addEventListener('submit', submitEventHandler);
+const removeUploadFormEventHandler = () => {
+  uploadForm.addEventListener('submit', submitEventHandler);
+};
 
-export {submitEventHandler, uploadForm};
-
-// uploadForm.addEventListener('submit', (evt) => {
-//   if (!pristine.validate() || !validateDescriptionPresence(inputDescription.value)) {
-//     evt.preventDefault();
-//   }
-// });
+export {addUploadFormEventHandler, removeUploadFormEventHandler};

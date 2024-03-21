@@ -20,14 +20,6 @@ const changeScale = (direction) => {
   scaleControlValue.value = `${defaultScale}%`;
 };
 
-// increaseScaleControlButton.addEventListener('click', () => {
-//   changeScale('increase');
-// });
-
-// decreaseScaleControlButton.addEventListener('click', () => {
-//   changeScale('decrease');
-// });
-
 const increaseScaleHandler = () => {
   changeScale('increase');
 };
@@ -36,12 +28,14 @@ const decreaseScaleHandler = () => {
   changeScale('decrease');
 };
 
-increaseScaleControlButton.addEventListener('click', increaseScaleHandler);
-decreaseScaleControlButton.addEventListener('click', decreaseScaleHandler);
+const addScaleEventHandlers = () => {
+  increaseScaleControlButton.addEventListener('click', increaseScaleHandler);
+  decreaseScaleControlButton.addEventListener('click', decreaseScaleHandler);
+};
 
 const removeScaleEventHandlers = () => {
   increaseScaleControlButton.removeEventListener('click', increaseScaleHandler);
   decreaseScaleControlButton.removeEventListener('click', decreaseScaleHandler);
 };
 
-export { removeScaleEventHandlers };
+export { removeScaleEventHandlers, addScaleEventHandlers };
