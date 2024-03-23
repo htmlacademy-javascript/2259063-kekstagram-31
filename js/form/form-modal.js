@@ -27,7 +27,7 @@ const uploadPictureHandler = () => {
   }
 };
 
-const closeUploadPictureOverlay = () => {
+const closeUploadPictureHandler = () => {
   uploadPictureOverlay.classList.add('hidden');
   document.body.classList.remove('modal-open');
   document.removeEventListener('keydown', uploadPictureKeyDownHandler);
@@ -37,11 +37,11 @@ const closeUploadPictureOverlay = () => {
 
 function uploadPictureKeyDownHandler(evt) {
   if (evt.key === 'Escape') {
-    closeUploadPictureOverlay();
+    closeUploadPictureHandler();
   }
 }
 
 uploadPictureInput.addEventListener('change', uploadPictureHandler);
-uploadOverlaycloseButton.addEventListener('click', closeUploadPictureOverlay);
+uploadOverlaycloseButton.addEventListener('click', closeUploadPictureHandler);
 
 export { uploadPicturePreviev };
