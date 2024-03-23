@@ -3,6 +3,8 @@ import { uploadPicturePreviev } from './form-modal';
 const effectLevelSlider = document.querySelector('.effect-level__slider');
 const effectLevelValue = document.querySelector('.effect-level__value');
 const effectLevelSliderContainer = document.querySelector('.img-upload__effect-level');
+const effectRadioButtons = document.querySelectorAll('.effects__radio');
+
 
 const effectsMap = {
   chrome: { filter: 'grayscale', unit: '', min: 0, max: 1 },
@@ -64,6 +66,6 @@ effectLevelSlider.noUiSlider.on('update', (values) => {
   updatePictureStyle();
 });
 
-document.querySelectorAll('.effects__radio').forEach((radio) => {
+effectRadioButtons.forEach((radio) => {
   radio.addEventListener('change', changeEffectHandler);
 });
