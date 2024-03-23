@@ -46,7 +46,6 @@ const changeEffectHandler = (evt) => {
     } else {
       effectLevelSlider.classList.remove('hidden');
     }
-    effectLevelValue.value = '100';
   }
 };
 
