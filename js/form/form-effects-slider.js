@@ -2,11 +2,12 @@ import { uploadPicturePreviev } from './form-modal';
 
 const effectLevelSlider = document.querySelector('.effect-level__slider');
 const effectLevelValue = document.querySelector('.effect-level__value');
+const effectLevelSliderContainer = document.querySelector('.img-upload__effect-level');
 
 const effectsMap = {
   chrome: { filter: 'grayscale', unit: '', min: 0, max: 1 },
   sepia: { filter: 'sepia', unit: '', min: 0, max: 1 },
-  marvin: { filter: 'invert', unit: '%', min: 0, max: 100 },
+  marvin: { filter: 'invert', unit: '%', min: 0, max: 1 },
   phobos: { filter: 'blur', unit: 'px', min: 0, max: 3 },
   heat: { filter: 'brightness', unit: '', min: 1, max: 3 }
 };
@@ -19,15 +20,20 @@ const updatePictureStyle = () => {
 
   if (currentEffect === 'none') {
     uploadPicturePreviev.style.filter = 'none';
-  } else if (currentEffect === 'invert') {
+    effectLevelSlider.classList.add('hidden');
+    effectLevelSliderContainer.classList.add('hidden');
+  } else if (currentEffect === 'marvin') {
     value = effectLevelValue.value * (effect.max - effect.min) + effect.min;
     uploadPicturePreviev.style.filter = `${effect.filter}(${value}${effect.unit})`;
+    effectLevelSliderContainer.classList.remove('hidden');
   } else if (currentEffect === 'phobos') {
     value = effectLevelValue.value * (effect.max - effect.min) / 100;
     uploadPicturePreviev.style.filter = `${effect.filter}(${value}${effect.unit})`;
+    effectLevelSliderContainer.classList.remove('hidden');
   } else {
     value = effectLevelValue.value * (effect.max - effect.min) / 100 + effect.min;
     uploadPicturePreviev.style.filter = `${effect.filter}(${value}${effect.unit})`;
+    effectLevelSliderContainer.classList.remove('hidden');
   }
 };
 
@@ -36,9 +42,9 @@ const changeEffectHandler = (evt) => {
     currentEffect = evt.target.value;
     updatePictureStyle();
     if (currentEffect === 'none') {
-      effectLevelSlider.style.display = 'none';
+      effectLevelSlider.classList.add('hidden');
     } else {
-      effectLevelSlider.style.display = 'block';
+      effectLevelSlider.classList.remove('hidden');
     }
     effectLevelValue.value = '100';
   }
@@ -54,12 +60,11 @@ noUiSlider.create(effectLevelSlider, {
   }
 });
 
-effectLevelSlider.noUiSlider.on('update', (values, handle) => {
-  effectLevelValue.value = Math.round(values[handle]);
+effectLevelSlider.noUiSlider.on('update', (values) => {
+  effectLevelValue.value = values;
   updatePictureStyle();
 });
 
-// Добавляем обработчик событий для переключения эффектов
 document.querySelectorAll('.effects__radio').forEach((radio) => {
   radio.addEventListener('change', changeEffectHandler);
 });
