@@ -1,3 +1,4 @@
+import { openPicture } from './picture/open-picture';
 import { renderPicutres } from './picture/render-pictures';
 
 const getData = () => {
@@ -7,12 +8,9 @@ const getData = () => {
         return response.json();
       }
 
-      throw new Error (`${response.status} ${response.statusText}`);
+      throw new Error(`${response.status} ${response.statusText}`);
     })
-    .then((data) => renderPicutres(data))
-    .catch((error) => {
-      error();
-    });
+    .then((data) => openPicture(renderPicutres(data), data));
 };
 
-export {getData};
+export { getData };
