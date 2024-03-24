@@ -1,5 +1,6 @@
 import { addUploadFormEventHandler, removeUploadFormEventHandler } from './form-validate';
 import { removeScaleEventHandlers, addScaleEventHandlers } from './form-scale';
+import { addEffectFieldsetEventHandler, removeEffectFieldsetEventHandler } from './form-effects-slider';
 
 const uploadPictureInput = document.querySelector('.img-upload__input');
 const uploadPictureOverlay = document.querySelector('.img-upload__overlay');
@@ -13,6 +14,7 @@ const uploadPictureHandler = () => {
   document.addEventListener('keydown', uploadPictureKeyDownHandler);
   addScaleEventHandlers();
   addUploadFormEventHandler();
+  addEffectFieldsetEventHandler();
 
   // загрузка изображений
   if (uploadPictureInput.files && uploadPictureInput.files[0]) {
@@ -33,6 +35,7 @@ const closeUploadPictureHandler = () => {
   document.removeEventListener('keydown', uploadPictureKeyDownHandler);
   removeUploadFormEventHandler();
   removeScaleEventHandlers();
+  removeEffectFieldsetEventHandler();
 };
 
 function uploadPictureKeyDownHandler(evt) {
@@ -41,7 +44,9 @@ function uploadPictureKeyDownHandler(evt) {
   }
 }
 
-uploadPictureInput.addEventListener('change', uploadPictureHandler);
-uploadOverlaycloseButton.addEventListener('click', closeUploadPictureHandler);
+const openUploadPicture = () => {
+  uploadPictureInput.addEventListener('change', uploadPictureHandler);
+  uploadOverlaycloseButton.addEventListener('click', closeUploadPictureHandler);
+};
 
-export { uploadPicturePreviev };
+export { uploadPicturePreviev, openUploadPicture };
