@@ -1,4 +1,4 @@
-const renderPicutres = (dataArr) => {
+const renderPictures = (dataArr) => {
   const pictureTemplate = document
     .querySelector('#picture')
     .content.querySelector('.picture');
@@ -22,4 +22,4 @@ const renderPicutres = (dataArr) => {
   return picturesContainer;
 };
 
-export { renderPicutres };
+export { renderPictures };

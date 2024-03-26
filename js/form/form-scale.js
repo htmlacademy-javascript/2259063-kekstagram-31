@@ -38,4 +38,11 @@ const removeScaleEventHandlers = () => {
   decreaseScaleControlButton.removeEventListener('click', decreaseScaleHandler);
 };
 
-export { removeScaleEventHandlers, addScaleEventHandlers };
+// сброс масштаба до дефолтного
+const resetScale = () => {
+  defaultScale = 100;
+  uploadPicturePreviev.style.transform = `scale(${defaultScale / 100})`;
+  scaleControlValue.value = `${defaultScale}%`;
+};
+
+export { removeScaleEventHandlers, addScaleEventHandlers, resetScale };

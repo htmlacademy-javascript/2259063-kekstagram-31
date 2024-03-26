@@ -1,5 +1,3 @@
-// import { uploadPicturePreviev } from './form-modal';
-
 const effectLevelSlider = document.querySelector('.effect-level__slider');
 const effectLevelValue = document.querySelector('.effect-level__value');
 const effectLevelSliderContainer = document.querySelector('.img-upload__effect-level');
@@ -15,7 +13,6 @@ const effectsMap = {
 };
 
 let currentEffect = 'none';
-
 const updatePictureStyle = () => {
   const effect = effectsMap[currentEffect];
   let value;
@@ -66,10 +63,6 @@ effectLevelSlider.noUiSlider.on('update', (values) => {
   updatePictureStyle();
 });
 
-effectFieldset.forEach((radio) => {
-  radio.addEventListener('change', changeEffectHandler);
-});
-
 const addEffectFieldsetEventHandler = () => {
   effectFieldset.forEach((radio) => {
     radio.addEventListener('change', changeEffectHandler);
@@ -82,4 +75,17 @@ const removeEffectFieldsetEventHandler = () => {
   });
 };
 
-export { addEffectFieldsetEventHandler, removeEffectFieldsetEventHandler };
+//Сброс настроек до дефолтных
+const resetEffectSlider = () => {
+  uploadPicturePreviev.style.filter = 'none';
+  effectLevelSliderContainer.classList.add('hidden');
+  effectLevelSlider.noUiSlider.set(100);
+  effectLevelValue.value = 100;
+  currentEffect = 'none';
+  updatePictureStyle();
+  removeEffectFieldsetEventHandler();
+  effectLevelSlider.noUiSlider.off('update');
+};
+
+
+export { addEffectFieldsetEventHandler, removeEffectFieldsetEventHandler, resetEffectSlider };

@@ -1,4 +1,4 @@
-import { addUploadFormEventHandler, removeUploadFormEventHandler } from './form-validate';
+// import { addUploadFormEventHandler, removeUploadFormEventHandler } from './form-validate';
 import { removeScaleEventHandlers, addScaleEventHandlers } from './form-scale';
 import { addEffectFieldsetEventHandler, removeEffectFieldsetEventHandler } from './form-effects-slider';
 
@@ -13,7 +13,7 @@ const uploadPictureHandler = () => {
   document.body.classList.add('modal-open');
   document.addEventListener('keydown', uploadPictureKeyDownHandler);
   addScaleEventHandlers();
-  addUploadFormEventHandler();
+  // addUploadFormEventHandler();
   addEffectFieldsetEventHandler();
 
   // загрузка изображений
@@ -33,7 +33,7 @@ const closeUploadPictureHandler = () => {
   uploadPictureOverlay.classList.add('hidden');
   document.body.classList.remove('modal-open');
   document.removeEventListener('keydown', uploadPictureKeyDownHandler);
-  removeUploadFormEventHandler();
+  // removeUploadFormEventHandler();
   removeScaleEventHandlers();
   removeEffectFieldsetEventHandler();
 };
@@ -49,4 +49,4 @@ const openUploadPicture = () => {
   uploadOverlaycloseButton.addEventListener('click', closeUploadPictureHandler);
 };
 
-export { uploadPicturePreviev, openUploadPicture };
+export { uploadPicturePreviev, openUploadPicture, uploadPictureHandler, closeUploadPictureHandler };
