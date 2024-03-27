@@ -1,4 +1,3 @@
-// import { addUploadFormEventHandler, removeUploadFormEventHandler } from './form-validate';
 import { removeScaleEventHandlers, addScaleEventHandlers } from './form-scale';
 import { addEffectFieldsetEventHandler, removeEffectFieldsetEventHandler } from './form-effects-slider';
 
@@ -49,4 +48,4 @@ const openUploadPicture = () => {
   uploadOverlaycloseButton.addEventListener('click', closeUploadPictureHandler);
 };
 
-export { uploadPicturePreviev, openUploadPicture, uploadPictureHandler, closeUploadPictureHandler };
+export { uploadPicturePreviev, openUploadPicture, uploadPictureHandler, closeUploadPictureHandler, uploadPictureKeyDownHandler };
