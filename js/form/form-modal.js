@@ -6,6 +6,7 @@ const uploadPictureOverlay = document.querySelector('.img-upload__overlay');
 const uploadOverlaycloseButton = uploadPictureOverlay.querySelector('.img-upload__cancel');
 const uploadPicturePreviev = document.querySelector('.img-upload__preview img');
 const uploadEffectsPreviev = document.querySelectorAll('.effects__preview');
+let isValidateMessageShown = false;
 
 const uploadPictureHandler = () => {
   uploadPictureOverlay.classList.remove('hidden');
@@ -38,9 +39,13 @@ const closeUploadPictureHandler = () => {
 };
 
 function uploadPictureKeyDownHandler(evt) {
-  if (evt.key === 'Escape') {
+  if (evt.key === 'Escape' && !isValidateMessageShown) {
     closeUploadPictureHandler();
   }
+}
+
+function setValidateMessageState(value) {
+  isValidateMessageShown = value;
 }
 
 const openUploadPicture = () => {
@@ -48,4 +53,4 @@ const openUploadPicture = () => {
   uploadOverlaycloseButton.addEventListener('click', closeUploadPictureHandler);
 };
 
-export { uploadPicturePreviev, openUploadPicture, uploadPictureHandler, closeUploadPictureHandler, uploadPictureKeyDownHandler };
+export { uploadPicturePreviev, openUploadPicture, uploadPictureHandler, closeUploadPictureHandler, setValidateMessageState };
