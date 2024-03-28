@@ -4,7 +4,7 @@ import { uploadForm } from '../form/form-validate';
 import { showValidateMessage } from '../form/show-validate-message';
 
 const sendData = (body) => fetch(
-  'https://31.javascript.htmlacademy.pro/kekstagram1',
+  'https://31.javascript.htmlacademy.pro/kekstagram',
   {
     method: 'POST',
     body,
