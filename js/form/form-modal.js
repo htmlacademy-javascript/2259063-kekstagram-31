@@ -1,4 +1,3 @@
-import { addUploadFormEventHandler, removeUploadFormEventHandler } from './form-validate';
 import { removeScaleEventHandlers, addScaleEventHandlers } from './form-scale';
 import { addEffectFieldsetEventHandler, removeEffectFieldsetEventHandler } from './form-effects-slider';
 
@@ -7,13 +6,14 @@ const uploadPictureOverlay = document.querySelector('.img-upload__overlay');
 const uploadOverlaycloseButton = uploadPictureOverlay.querySelector('.img-upload__cancel');
 const uploadPicturePreviev = document.querySelector('.img-upload__preview img');
 const uploadEffectsPreviev = document.querySelectorAll('.effects__preview');
+let isValidateMessageShown = false;
 
 const uploadPictureHandler = () => {
   uploadPictureOverlay.classList.remove('hidden');
   document.body.classList.add('modal-open');
   document.addEventListener('keydown', uploadPictureKeyDownHandler);
   addScaleEventHandlers();
-  addUploadFormEventHandler();
+  // addUploadFormEventHandler();
   addEffectFieldsetEventHandler();
 
   // загрузка изображений
@@ -22,7 +22,7 @@ const uploadPictureHandler = () => {
     reader.onload = (element) => {
       uploadPicturePreviev.src = element.target.result;
       uploadEffectsPreviev.forEach((effectPreview) => {
-        effectPreview.style.backgroundImage = `url('./photos/${uploadPictureInput.files[0].name}')`;
+        effectPreview.style.backgroundImage = `url(${reader.result})`;
       });
     };
     reader.readAsDataURL(uploadPictureInput.files[0]);
@@ -33,15 +33,19 @@ const closeUploadPictureHandler = () => {
   uploadPictureOverlay.classList.add('hidden');
   document.body.classList.remove('modal-open');
   document.removeEventListener('keydown', uploadPictureKeyDownHandler);
-  removeUploadFormEventHandler();
+  // removeUploadFormEventHandler();
   removeScaleEventHandlers();
   removeEffectFieldsetEventHandler();
 };
 
 function uploadPictureKeyDownHandler(evt) {
-  if (evt.key === 'Escape') {
+  if (evt.key === 'Escape' && !isValidateMessageShown) {
     closeUploadPictureHandler();
   }
+}
+
+function setValidateMessageState(value) {
+  isValidateMessageShown = value;
 }
 
 const openUploadPicture = () => {
@@ -49,4 +53,4 @@ const openUploadPicture = () => {
   uploadOverlaycloseButton.addEventListener('click', closeUploadPictureHandler);
 };
 
-export { uploadPicturePreviev, openUploadPicture };
+export { uploadPicturePreviev, openUploadPicture, uploadPictureHandler, closeUploadPictureHandler, setValidateMessageState };

@@ -1,8 +1,13 @@
+// import { resetScale } from './form-scale';
+// import { resetEffectSlider } from './form-effects-slider';
+import { sendData } from '../api/send-data';
+
 const HASHTAGS_MAX_VALUE = 5;
 const DESCRIPTION_MAX_LENGTH = 140;
 const REGEXP_HASHTAG_FORMAT = /^#[a-zа-яё0-9]{1,19}$/i;
 
 const uploadForm = document.querySelector('.img-upload__form');
+
 const pristine = new Pristine(uploadForm, {
   classTo: 'img-upload__field-wrapper',
   errorClass: 'img-upload__field-wrapper--error',
@@ -31,7 +36,7 @@ inputDescription.addEventListener('keydown', (evt) => {
   uploadFormInputsKeyDownHandler(evt, inputDescription);
 });
 
-const validateDescriptionPresence = (value) => value.trim() === '';
+// const validateDescriptionPresence = (value) => value.trim() === '';
 
 const validateHashtagsFormat = (value) => {
   if (value.trim() === '') {
@@ -60,17 +65,18 @@ pristine.addValidator(inputHashtag, validateHashtagsCount, 'Максимальн
 pristine.addValidator(inputHashtag, validateHashtagsUnique, 'Имеются повторяющиеся хэштеги');
 pristine.addValidator(inputDescription, validateDescriptionLength, 'Превышено максимальное кол-во символов - 140');
 
-const submitEventHandler = (evt) => {
-  if (!pristine.validate() || !validateDescriptionPresence(inputDescription.value)) {
+const setPictureFormSubmit = (onSuccess) => {
+  uploadForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
-  }
-};
-const addUploadFormEventHandler = () => {
-  uploadForm.addEventListener('submit', submitEventHandler);
+
+    if (pristine.validate()) {
+      sendData(new FormData(evt.target))
+        .then(onSuccess)
+        .catch(() => {
+          //TODO Здесь тоже уточниться нужно
+        });
+    }
+  });
 };
 
-const removeUploadFormEventHandler = () => {
-  uploadForm.addEventListener('submit', submitEventHandler);
-};
-
-export {addUploadFormEventHandler, removeUploadFormEventHandler};
+export { setPictureFormSubmit, uploadForm };

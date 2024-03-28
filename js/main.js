@@ -1,11 +1,11 @@
-import { addPictures } from './picture/add-picture';
-import { renderPicutres } from './picture/render-pictures';
-import { openPicture } from './picture/open-picture';
 import { openUploadPicture } from './form/form-modal';
+import { closeUploadPictureHandler } from './form/form-modal';
+import { getData } from './api/get-data';
+import { setPictureFormSubmit } from './form/form-validate';
+import { openPicture } from './picture/open-picture';
+import { renderPictures } from './picture/render-pictures';
 
-const picturesDataArr = addPictures();
-const picturesLayout = renderPicutres(picturesDataArr);
-openPicture(picturesLayout, picturesDataArr);
 openUploadPicture();
-
-export { picturesDataArr, picturesLayout };
+getData()
+  .then((data) => openPicture(renderPictures(data), data));
+setPictureFormSubmit(closeUploadPictureHandler);
