@@ -22,7 +22,7 @@ const uploadPictureHandler = () => {
     reader.onload = (element) => {
       uploadPicturePreviev.src = element.target.result;
       uploadEffectsPreviev.forEach((effectPreview) => {
-        effectPreview.style.backgroundImage = `url('./photos/${uploadPictureInput.files[0].name}')`;
+        effectPreview.style.backgroundImage = `url(${reader.result})`;
       });
     };
     reader.readAsDataURL(uploadPictureInput.files[0]);

@@ -5,6 +5,7 @@ const showValidateMessage = (value) => {
   const validateMessage = validateMessageTemplate.cloneNode(true);
   document.body.append(validateMessage);
   const validateMessageButton = document.querySelector(`.${value}__button`);
+  const validateMessageInner = validateMessage.querySelector(`.${value}__inner`);
 
   validateMessageButton.addEventListener('click', () => {
     validateMessage.remove();
@@ -20,7 +21,7 @@ const showValidateMessage = (value) => {
   });
 
   document.addEventListener('click', (evt) => {
-    if(!validateMessage.contains(evt.target)) {
+    if(!validateMessageInner.contains(evt.target)) {
       validateMessage.remove();
       setValidateMessageState(false);
     }
