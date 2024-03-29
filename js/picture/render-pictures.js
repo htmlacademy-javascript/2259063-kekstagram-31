@@ -1,7 +1,5 @@
 const renderPictures = (dataArr) => {
-  const pictureTemplate = document
-    .querySelector('#picture')
-    .content.querySelector('.picture');
+  const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
   const picturesContainer = document.querySelector('.pictures');
   const pictureListFragments = document.createDocumentFragment();
   dataArr.forEach(({ url, description, likes, comments}) => {

@@ -5,7 +5,41 @@ import { setPictureFormSubmit } from './form/form-validate';
 import { openPicture } from './picture/open-picture';
 import { renderPictures } from './picture/render-pictures';
 
+import { showFiltersPanel } from './filters/filters';
+import { getRandomElementsFromArray, removeElements } from './util';
+
+
+const AMOUNT_FOR_RANDOM_FILTER = 10;
+
 openUploadPicture();
 getData()
-  .then((data) => openPicture(renderPictures(data), data));
+  .then((data) => openPicture(renderPictures(data), data)).then(() => showFiltersPanel());
 setPictureFormSubmit(closeUploadPictureHandler);
+
+
+const filterButtons = document.querySelectorAll('.img-filters__button');
+
+filterButtons.forEach((button) => {
+  button.addEventListener('click', (evt) => {
+    console.log(`кликнули на меня ${evt.target.id}`);
+
+    if (evt.target.id === 'filter-default') {
+      removeElements('.picture');
+      getData()
+        .then((data) => renderPictures(data));
+    }
+
+    if (evt.target.id === 'filter-random') {
+      removeElements('.picture');
+      getData()
+        .then((data) => {
+          const randomData = getRandomElementsFromArray(data, AMOUNT_FOR_RANDOM_FILTER);
+          openPicture(renderPictures(randomData), randomData);
+        });
+    }
+
+    if (evt.target.id === 'filter-discussed') {
+      removeElements('pictures', 'picture');
+    }
+  });
+});

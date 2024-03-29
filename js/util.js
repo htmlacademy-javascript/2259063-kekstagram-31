@@ -18,4 +18,11 @@ const getRandomText = (text) => {
   return `${getRandomArrayElement(textArray)}.`;
 };
 
-export { getRandomInteger, getRandomArrayElement, getRandomId, getRandomText};
+const getRandomElementsFromArray = (array, amount) => array.slice().sort(() => Math.random() - 0.5).slice(0, amount);
+
+const removeElements = (removedElements) => {
+  const elementsToRemove = document.querySelectorAll(removedElements);
+  elementsToRemove.forEach((element) => element.remove());
+};
+
+export { getRandomInteger, getRandomArrayElement, getRandomId, getRandomText, getRandomElementsFromArray, removeElements };
