@@ -19,10 +19,10 @@ const sendData = (body) => fetch(
       throw new Error();
     }
   })
-  .catch (() => {
+  .catch(() => {
     showValidateMessage('error');
     throw new Error('Не удалось отправить форму. Попробуйте ещё раз');
   });
 
-export {sendData};
+export { sendData };
 

@@ -25,7 +25,6 @@ const removeElements = (removedElements) => {
   elementsToRemove.forEach((element) => element.remove());
 };
 
-
 const debounce = (callback, timeoutDelay) => {
   let timeoutId;
   return (...rest) => {
