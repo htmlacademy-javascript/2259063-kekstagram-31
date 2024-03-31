@@ -25,4 +25,13 @@ const removeElements = (removedElements) => {
   elementsToRemove.forEach((element) => element.remove());
 };
 
-export { getRandomInteger, getRandomArrayElement, getRandomId, getRandomText, getRandomElementsFromArray, removeElements };
+
+const debounce = (callback, timeoutDelay) => {
+  let timeoutId;
+  return (...rest) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+  };
+};
+
+export { getRandomInteger, debounce, getRandomArrayElement, getRandomId, getRandomText, getRandomElementsFromArray, removeElements };
