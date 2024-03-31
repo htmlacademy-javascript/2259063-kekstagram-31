@@ -1,5 +1,3 @@
-// import { resetScale } from './form-scale';
-// import { resetEffectSlider } from './form-effects-slider';
 import { sendData } from '../api/send-data';
 
 const HASHTAGS_MAX_VALUE = 5;
@@ -73,7 +71,6 @@ const setPictureFormSubmit = (onSuccess) => {
       sendData(new FormData(evt.target))
         .then(onSuccess)
         .catch(() => {
-          //TODO Здесь тоже уточниться нужно
         });
     }
   });
