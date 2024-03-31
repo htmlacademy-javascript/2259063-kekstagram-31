@@ -1,8 +1,3 @@
-import { resetEffectSlider } from '../form/form-effects-slider';
-import { resetScale } from '../form/form-scale';
-import { uploadForm } from '../form/form-validate';
-import { showValidateMessage } from '../form/show-validate-message';
-
 const sendData = (body) => fetch(
   'https://31.javascript.htmlacademy.pro/kekstagram',
   {
@@ -11,17 +6,10 @@ const sendData = (body) => fetch(
   })
   .then((response) => {
     if (response.ok) {
-      uploadForm.reset();
-      resetEffectSlider();
-      resetScale();
-      showValidateMessage('success');
+      return response.json(); // Возвращаем результат в виде JSON
     } else {
-      throw new Error();
+      throw new Error(); // Если запрос не успешен, выбрасываем ошибку
     }
-  })
-  .catch(() => {
-    showValidateMessage('error');
-    throw new Error('Не удалось отправить форму. Попробуйте ещё раз');
   });
 
 export { sendData };

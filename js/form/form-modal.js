@@ -33,9 +33,9 @@ const closeUploadPictureHandler = () => {
   uploadPictureOverlay.classList.add('hidden');
   document.body.classList.remove('modal-open');
   document.removeEventListener('keydown', uploadPictureKeyDownHandler);
-  // removeUploadFormEventHandler();
   removeScaleEventHandlers();
   removeEffectFieldsetEventHandler();
+
 };
 
 function uploadPictureKeyDownHandler(evt) {

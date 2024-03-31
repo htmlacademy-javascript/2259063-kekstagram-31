@@ -1,4 +1,7 @@
 import { sendData } from '../api/send-data';
+import { resetEffectSlider } from './form-effects-slider';
+import { resetScale } from './form-scale';
+import { showValidateMessage } from './show-validate-message';
 
 const HASHTAGS_MAX_VALUE = 5;
 const DESCRIPTION_MAX_LENGTH = 140;
@@ -23,6 +26,9 @@ function uploadFormInputsKeyDownHandler(evt, input) {
   if (evt.key === 'Escape') {
     evt.stopPropagation();
     input.blur();
+    // if (!pristine.validate(inputHashtag)) {
+    //   input.blur();
+    // }
   }
 }
 
@@ -68,9 +74,21 @@ const setPictureFormSubmit = (onSuccess) => {
     evt.preventDefault();
 
     if (pristine.validate()) {
+      const submitButton = uploadForm.querySelector('.img-upload__submit');
+      submitButton.disabled = true; // Блокируем кнопку
+
       sendData(new FormData(evt.target))
-        .then(onSuccess)
+        .then(() => {
+          uploadForm.reset();
+          resetEffectSlider();
+          resetScale();
+          showValidateMessage('success');
+          onSuccess();
+          submitButton.disabled = false;
+        })
         .catch(() => {
+          showValidateMessage('error');
+          submitButton.disabled = false;
         });
     }
   });

@@ -79,8 +79,8 @@ const removeEffectFieldsetEventHandler = () => {
 const resetEffectSlider = () => {
   uploadPicturePreviev.style.filter = 'none';
   effectLevelSliderContainer.classList.add('hidden');
-  effectLevelSlider.noUiSlider.set(100);
-  effectLevelValue.value = 100;
+  effectLevelSlider.noUiSlider.set(50); //
+  effectLevelValue.value = 50; //
   currentEffect = 'none';
   updatePictureStyle();
   removeEffectFieldsetEventHandler();
