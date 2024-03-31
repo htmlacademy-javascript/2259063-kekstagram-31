@@ -9,4 +9,4 @@ import { showFiltersForPreviewPanel, changeFilterForPreview, filterButtons } fro
 openUploadPicture();
 getData().then((data) => openPicture(renderPictures(data), data)).then(() => showFiltersForPreviewPanel());
 setPictureFormSubmit(closeUploadPictureHandler);
-changeFilterForPreview(filterButtons)
+changeFilterForPreview(filterButtons);
