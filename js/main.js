@@ -21,7 +21,6 @@ const filterButtons = document.querySelectorAll('.img-filters__button');
 
 filterButtons.forEach((button) => {
   button.addEventListener('click', (evt) => {
-    console.log(`кликнули на меня ${evt.target.id}`);
 
     if (evt.target.id === 'filter-default') {
       removeElements('.picture');
@@ -39,7 +38,12 @@ filterButtons.forEach((button) => {
     }
 
     if (evt.target.id === 'filter-discussed') {
-      removeElements('pictures', 'picture');
+      removeElements('.picture');
+      getData()
+        .then((data) => {
+          const sortedData = data.sort((a , b) => b.comments.length - a.comments.length);
+          openPicture(renderPictures(sortedData), sortedData);
+        })
     }
   });
 });
