@@ -1,5 +1,5 @@
 import { removeScaleEventHandlers, addScaleEventHandlers } from './form-scale';
-import { addEffectFieldsetEventHandler, removeEffectFieldsetEventHandler } from './form-effects-slider';
+import { addEffectFieldsetEventHandler, removeEffectFieldsetEventHandler, resetEffectSlider } from './form-effects-slider';
 
 const uploadPictureInput = document.querySelector('.img-upload__input');
 const uploadPictureOverlay = document.querySelector('.img-upload__overlay');
@@ -35,7 +35,7 @@ const closeUploadPictureHandler = () => {
   document.removeEventListener('keydown', uploadPictureKeyDownHandler);
   removeScaleEventHandlers();
   removeEffectFieldsetEventHandler();
-
+  resetEffectSlider();
 };
 
 function uploadPictureKeyDownHandler(evt) {
