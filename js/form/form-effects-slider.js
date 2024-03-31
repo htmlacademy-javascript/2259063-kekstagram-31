@@ -39,6 +39,8 @@ const updatePictureStyle = () => {
 const changeEffectHandler = (evt) => {
   if (evt.target.checked) {
     currentEffect = evt.target.value;
+    effectLevelSlider.noUiSlider.set(100);
+    effectLevelValue.value = 100;
     updatePictureStyle();
     if (currentEffect === 'none') {
       effectLevelSlider.classList.add('hidden');
@@ -76,16 +78,12 @@ const removeEffectFieldsetEventHandler = () => {
 };
 
 //Сброс настроек до дефолтных
-const resetEffectSlider = () => {
+function resetEffectSlider() {
   uploadPicturePreviev.style.filter = 'none';
   effectLevelSliderContainer.classList.add('hidden');
-  effectLevelSlider.noUiSlider.set(50); //
-  effectLevelValue.value = 50; //
   currentEffect = 'none';
   updatePictureStyle();
   removeEffectFieldsetEventHandler();
-  effectLevelSlider.noUiSlider.off('update');
-};
-
+}
 
 export { addEffectFieldsetEventHandler, removeEffectFieldsetEventHandler, resetEffectSlider };
