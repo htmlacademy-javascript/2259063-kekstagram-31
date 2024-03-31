@@ -8,4 +8,4 @@ const addDataError = () => {
   }, 5000);
 };
 
-export {addDataError};
+export { addDataError };
