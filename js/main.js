@@ -10,6 +10,15 @@ import { getRandomElementsFromArray, removeElements } from './util';
 
 
 const AMOUNT_FOR_RANDOM_FILTER = 10;
+const RERENDER_DELAY = 500;
+
+const debounce = (callback, timeoutDelay) => {
+  let timeoutId;
+  return (...rest) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+  };
+};
 
 openUploadPicture();
 getData()
@@ -20,8 +29,7 @@ setPictureFormSubmit(closeUploadPictureHandler);
 const filterButtons = document.querySelectorAll('.img-filters__button');
 
 filterButtons.forEach((button) => {
-  button.addEventListener('click', (evt) => {
-
+  button.addEventListener('click', debounce((evt) => {
     if (evt.target.id === 'filter-default') {
       removeElements('.picture');
       getData()
@@ -43,7 +51,9 @@ filterButtons.forEach((button) => {
         .then((data) => {
           const sortedData = data.sort((a , b) => b.comments.length - a.comments.length);
           openPicture(renderPictures(sortedData), sortedData);
-        })
+        });
     }
-  });
+  }, RERENDER_DELAY));
 });
+
+
