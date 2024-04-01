@@ -5,9 +5,9 @@ import { openPicture } from '../picture/open-picture';
 
 const AMOUNT_FOR_RANDOM_FILTER = 10;
 const RERENDER_DELAY = 500;
+const filters = document.querySelector('.img-filters');
 
 const showFiltersForPreviewPanel = () => {
-  const filters = document.querySelector('.img-filters');
   filters.classList.remove('img-filters--inactive');
 };
 
@@ -16,6 +16,14 @@ const filterButtons = document.querySelectorAll('.img-filters__button');
 const changeFilterForPreview = (buttons) => {
   buttons.forEach((button) => {
     button.addEventListener('click', debounce((evt) => {
+      // Удаление класса img-filters__button--active со всех кнопок фильтров
+      filterButtons.forEach((filterButton) => {
+        filterButton.classList.remove('img-filters__button--active');
+      });
+
+      // Добавление класса img-filters__button--active к выбранной кнопке фильтра
+      evt.target.classList.add('img-filters__button--active');
+
       if (evt.target.id === 'filter-default') {
         removeElements('.picture');
         getData()
