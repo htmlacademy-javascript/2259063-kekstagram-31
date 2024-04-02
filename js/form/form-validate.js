@@ -16,8 +16,7 @@ const pristine = new Pristine(uploadForm, {
   errorTextParent: 'img-upload__field-wrapper',
   errorTextTag: 'div',
   errorTextClass: 'pristine-error'
-},
-false
+}
 );
 const inputHashtag = uploadForm.querySelector('#hashtags');
 const inputDescription = uploadForm.querySelector('#description');
@@ -85,6 +84,7 @@ const setPictureFormSubmit = (onSuccess) => {
           showValidateMessage('success');
           onSuccess();
           submitButton.disabled = false;
+          pristine.reset(); // Сбросить состояние валидации формы
         })
         .catch(() => {
           showValidateMessage('error');

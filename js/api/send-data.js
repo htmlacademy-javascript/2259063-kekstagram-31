@@ -1,5 +1,5 @@
 const sendData = (body) => fetch(
-  'https://31.javascript.htmlacademy.pro/kekstagram',
+  'https://31.javascript.htmlacademy.pro/kekstagram/',
   {
     method: 'POST',
     body,
