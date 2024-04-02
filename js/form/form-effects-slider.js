@@ -17,22 +17,25 @@ const updatePictureStyle = () => {
   const effect = effectsMap[currentEffect];
   let value;
 
-  if (currentEffect === 'none') {
-    uploadPicturePreviev.style.filter = 'none';
-    effectLevelSlider.classList.add('hidden');
-    effectLevelSliderContainer.classList.add('hidden');
+  if (currentEffect === 'chrome' || currentEffect === 'sepia') {
+    value = effectLevelValue.value * (effect.max - effect.min) / 100;
+    uploadPicturePreviev.style.filter = `${effect.filter}(${value})`;
+    effectLevelSliderContainer.classList.remove('hidden');
   } else if (currentEffect === 'marvin') {
-    value = effectLevelValue.value * (effect.max - effect.min) + effect.min;
+    value = Math.round(effectLevelValue.value * (effect.max - effect.min) + effect.min);
     uploadPicturePreviev.style.filter = `${effect.filter}(${value}${effect.unit})`;
     effectLevelSliderContainer.classList.remove('hidden');
   } else if (currentEffect === 'phobos') {
-    value = effectLevelValue.value * (effect.max - effect.min) / 100;
+    value = Math.round(effectLevelValue.value * (effect.max - effect.min) / 100);
     uploadPicturePreviev.style.filter = `${effect.filter}(${value}${effect.unit})`;
+    effectLevelSliderContainer.classList.remove('hidden');
+  } else if (currentEffect === 'heat') {
+    value = Math.round(effectLevelValue.value * (effect.max - effect.min) / 100 + effect.min);
+    uploadPicturePreviev.style.filter = `${effect.filter}(${value})`;
     effectLevelSliderContainer.classList.remove('hidden');
   } else {
-    value = effectLevelValue.value * (effect.max - effect.min) / 100 + effect.min;
-    uploadPicturePreviev.style.filter = `${effect.filter}(${value}${effect.unit})`;
-    effectLevelSliderContainer.classList.remove('hidden');
+    uploadPicturePreviev.style.filter = 'none';
+    effectLevelSliderContainer.classList.add('hidden');
   }
 };
 

@@ -1,7 +1,8 @@
 import { removeScaleEventHandlers, addScaleEventHandlers } from './form-scale';
 import { addEffectFieldsetEventHandler, removeEffectFieldsetEventHandler, resetEffectSlider } from './form-effects-slider';
 import { uploadForm } from './form-validate';
-import { uploadPicture } from './form-upload-picture';
+import { uploadPicture} from './form-upload-picture';
+import { pristine } from './form-validate';
 
 const uploadPictureInput = document.querySelector('.img-upload__input');
 const uploadPictureOverlay = document.querySelector('.img-upload__overlay');
@@ -29,6 +30,7 @@ const closeUploadPictureHandler = () => {
   removeEffectFieldsetEventHandler();
   resetEffectSlider();
   uploadForm.reset();
+  pristine.reset();
 
 };
 

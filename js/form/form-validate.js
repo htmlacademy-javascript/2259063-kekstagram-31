@@ -40,8 +40,23 @@ const validateHashtagsFormat = (value) => {
   if (value.trim() === '') {
     return true;
   } else {
-    const hashtags = value.split(' ');
-    return hashtags.every((tag) => REGEXP_HASHTAG_FORMAT.test(tag));
+    const hashtags = value.split(/\s+/);
+    let isFirstTagValid = false;
+
+    for (let i = 0; i < hashtags.length; i++) {
+      const tag = hashtags[i];
+
+      if (tag.trim() !== '') {
+        if (!REGEXP_HASHTAG_FORMAT.test(tag)) {
+          return false;
+        }
+        if (!isFirstTagValid) {
+          isFirstTagValid = true;
+        }
+      }
+    }
+
+    return isFirstTagValid;
   }
 };
 
@@ -88,4 +103,4 @@ const setPictureFormSubmit = (onSuccess) => {
   });
 };
 
-export { setPictureFormSubmit, uploadForm };
+export { setPictureFormSubmit, uploadForm, pristine };
