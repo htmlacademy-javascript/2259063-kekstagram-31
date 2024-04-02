@@ -28,6 +28,7 @@ const closeUploadPictureHandler = () => {
   removeScaleEventHandlers();
   removeEffectFieldsetEventHandler();
   resetEffectSlider();
+  uploadForm.reset();
 
 };
 
