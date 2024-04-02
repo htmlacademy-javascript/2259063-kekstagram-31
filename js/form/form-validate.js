@@ -25,9 +25,6 @@ function uploadFormInputsKeyDownHandler(evt, input) {
   if (evt.key === 'Escape') {
     evt.stopPropagation();
     input.blur();
-    // if (!pristine.validate(inputHashtag)) {
-    //   input.blur();
-    // }
   }
 }
 
@@ -38,8 +35,6 @@ inputHashtag.addEventListener('keydown', (evt) => {
 inputDescription.addEventListener('keydown', (evt) => {
   uploadFormInputsKeyDownHandler(evt, inputDescription);
 });
-
-// const validateDescriptionPresence = (value) => value.trim() === '';
 
 const validateHashtagsFormat = (value) => {
   if (value.trim() === '') {
@@ -84,7 +79,6 @@ const setPictureFormSubmit = (onSuccess) => {
           showValidateMessage('success');
           onSuccess();
           submitButton.disabled = false;
-          pristine.reset(); // Сбросить состояние валидации формы
         })
         .catch(() => {
           showValidateMessage('error');

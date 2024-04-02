@@ -6,9 +6,9 @@ const sendData = (body) => fetch(
   })
   .then((response) => {
     if (response.ok) {
-      return response.json(); // Возвращаем результат в виде JSON
+      return response.json();
     } else {
-      throw new Error(); // Если запрос не успешен, выбрасываем ошибку
+      throw new Error();
     }
   });
 
