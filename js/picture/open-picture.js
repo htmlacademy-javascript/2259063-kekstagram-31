@@ -11,10 +11,11 @@ const commentsShowCount = bigPicturePreviev.querySelector('.social__comment-show
 const openPicture = (gallery, dataArr) => {
   gallery = gallery.querySelectorAll('.picture');
   gallery.forEach((thumbnail, index) => {
-    const thumbnailUrl = thumbnail.querySelector('img').src;
-    const thumbnailAlt = thumbnail.querySelector('img').alt;
-    const thumbnailComments = thumbnail.querySelector('.picture__comments').textContent;
-    const thumbnailLikes = thumbnail.querySelector('.picture__likes').textContent;
+    const imageData = dataArr[index];
+    const thumbnailUrl = imageData.url;
+    const thumbnailAlt = imageData.description;
+    const thumbnailComments = imageData.comments.length;
+    const thumbnailLikes = imageData.likes;
 
     // обработчик на клик по миниатюре
     thumbnail.addEventListener('click', () => {
