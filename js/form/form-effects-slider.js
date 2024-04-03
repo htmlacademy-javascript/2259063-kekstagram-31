@@ -52,12 +52,13 @@ const changeEffectHandler = (evt) => {
           max: effect.max
         }
       });
+      effectLevelSlider.noUiSlider.set(effect.max);
+      effectLevelValue.value = effect.max;
     } else {
       effectLevelSlider.classList.add('hidden');
     }
 
-    effectLevelSlider.noUiSlider.set(effect.max);
-    effectLevelValue.value = effect.max;
+
     updatePictureStyle();
     if (currentEffect === 'none') {
       effectLevelSlider.classList.add('hidden');
