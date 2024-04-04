@@ -10,9 +10,7 @@ import { changeFilterForPreview, filterButtons } from './filters/filters';
 
 openUploadPicture();
 setPictureFormSubmit(closeUploadPictureHandler);
-const dataPromise = getData().then((data) => {
+getData().then((data) => {
   openPicture(renderPictures(data), data);
-  return data;
+  changeFilterForPreview(filterButtons, data);
 });
-
-changeFilterForPreview(filterButtons, dataPromise);

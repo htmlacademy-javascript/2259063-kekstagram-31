@@ -58,7 +58,6 @@ const changeEffectHandler = (evt) => {
       effectLevelSlider.classList.add('hidden');
     }
 
-
     updatePictureStyle();
     if (currentEffect === 'none') {
       effectLevelSlider.classList.add('hidden');
