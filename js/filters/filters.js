@@ -1,7 +1,7 @@
-// import { debounce } from '../util';
+import { debounce } from '../util';
 import { handleFilterButtonClick } from './handle-filter-button';
 
-// const RERENDER_DELAY = 500;
+const RERENDER_DELAY = 500;
 const filters = document.querySelector('.img-filters');
 const filterButtons = document.querySelectorAll('.img-filters__button');
 
@@ -9,10 +9,20 @@ const showFiltersForPreviewPanel = () => {
   filters.classList.remove('img-filters--inactive');
 };
 
+const debounceHandleFilterButtonClick = debounce(handleFilterButtonClick, RERENDER_DELAY);
+
+const checkActiveButton = (buttons, evt) => {
+  buttons.forEach((filterButton) => {
+    filterButton.classList.remove('img-filters__button--active');
+  });
+  evt.target.classList.add('img-filters__button--active');
+};
+
 const changeFilterForPreview = (buttons, data) => {
   buttons.forEach((button) => {
     button.addEventListener('click', (evt) => {
-      handleFilterButtonClick(buttons, data, evt);
+      checkActiveButton(buttons, evt);
+      debounceHandleFilterButtonClick(data, evt);
     });
   });
 };
