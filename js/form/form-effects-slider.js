@@ -97,13 +97,10 @@ const removeEffectFieldsetEventHandler = () => {
   });
 };
 
-
 function resetEffectSlider() {
   uploadPicturePreviev.style.filter = 'none';
   effectLevelSliderContainer.classList.add('hidden');
   currentEffect = 'none';
-  // updatePictureStyle();
-  // removeEffectFieldsetEventHandler();
 }
 
 const deleteSliderOnNoneEffect = () => {

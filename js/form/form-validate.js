@@ -84,7 +84,7 @@ const setPictureFormSubmit = (onSuccess) => {
 
     if (pristine.validate()) {
       const submitButton = uploadForm.querySelector('.img-upload__submit');
-      submitButton.disabled = true; // Блокируем кнопку
+      submitButton.disabled = true;
 
       sendData(new FormData(evt.target))
         .then(() => {
