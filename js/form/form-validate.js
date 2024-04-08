@@ -1,4 +1,7 @@
 import { sendData } from '../api/send-data';
+import { resetEffectSlider } from './form-effects-slider';
+import { resetScale } from './form-scale';
+import { showValidateMessage } from './show-validate-message';
 
 const HASHTAGS_MAX_VALUE = 5;
 const DESCRIPTION_MAX_LENGTH = 140;
@@ -13,8 +16,7 @@ const pristine = new Pristine(uploadForm, {
   errorTextParent: 'img-upload__field-wrapper',
   errorTextTag: 'div',
   errorTextClass: 'pristine-error'
-},
-false
+}
 );
 const inputHashtag = uploadForm.querySelector('#hashtags');
 const inputDescription = uploadForm.querySelector('#description');
@@ -34,14 +36,27 @@ inputDescription.addEventListener('keydown', (evt) => {
   uploadFormInputsKeyDownHandler(evt, inputDescription);
 });
 
-// const validateDescriptionPresence = (value) => value.trim() === '';
-
 const validateHashtagsFormat = (value) => {
   if (value.trim() === '') {
     return true;
   } else {
-    const hashtags = value.split(' ');
-    return hashtags.every((tag) => REGEXP_HASHTAG_FORMAT.test(tag));
+    const hashtags = value.split(/\s+/);
+    let isFirstTagValid = false;
+
+    for (let i = 0; i < hashtags.length; i++) {
+      const tag = hashtags[i];
+
+      if (tag.trim() !== '') {
+        if (!REGEXP_HASHTAG_FORMAT.test(tag)) {
+          return false;
+        }
+        if (!isFirstTagValid) {
+          isFirstTagValid = true;
+        }
+      }
+    }
+
+    return isFirstTagValid;
   }
 };
 
@@ -68,12 +83,24 @@ const setPictureFormSubmit = (onSuccess) => {
     evt.preventDefault();
 
     if (pristine.validate()) {
+      const submitButton = uploadForm.querySelector('.img-upload__submit');
+      submitButton.disabled = true;
+
       sendData(new FormData(evt.target))
-        .then(onSuccess)
+        .then(() => {
+          uploadForm.reset();
+          resetEffectSlider();
+          resetScale();
+          showValidateMessage('success');
+          onSuccess();
+          submitButton.disabled = false;
+        })
         .catch(() => {
+          showValidateMessage('error');
+          submitButton.disabled = false;
         });
     }
   });
 };
 
-export { setPictureFormSubmit, uploadForm };
+export { setPictureFormSubmit, uploadForm, pristine };
