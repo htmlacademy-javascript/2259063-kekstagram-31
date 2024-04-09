@@ -20,6 +20,7 @@ const updatePictureStyle = () => {
 
   if (currentEffect === 'chrome' || currentEffect === 'sepia') {
     resultEffect = effect.min + (effectLevelValue.value * (effect.max - effect.min));
+    uploadPicturePreviev.style.filter = `${effect.filter}(${resultEffect}${effect.unit})`;
     effectLevelSliderContainer.classList.remove('hidden');
   } else if (currentEffect === 'marvin') {
     resultEffect = effect.min + Math.round(effectLevelValue.value * (effect.max - effect.min) / 100);

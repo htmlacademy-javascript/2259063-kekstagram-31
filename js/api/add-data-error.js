@@ -1,3 +1,5 @@
+const ERROR_DISPLAY_DURATION = 5000;
+
 const addDataError = () => {
   const errorTemplate = document.querySelector('#data-error').content.querySelector('.data-error');
   const dataError = errorTemplate.cloneNode(true);
@@ -5,7 +7,7 @@ const addDataError = () => {
 
   setTimeout(() => {
     dataError.remove();
-  }, 5000);
+  }, ERROR_DISPLAY_DURATION);
 };
 
 export { addDataError };

@@ -1,5 +1,6 @@
 import { commentsShowCount, commentsList } from './open-picture';
 
+const INITIAL_COMMENTS_COUNT = 5;
 const modalBigPicture = document.querySelector('.big-picture');
 const modalBigPictureCloseButton = modalBigPicture.querySelector('.cancel');
 
@@ -8,10 +9,10 @@ const openModalBigPicture = () => {
   document.body.classList.add('modal-open');
   document.addEventListener('keydown', bigPictureKeyDownHandler);
 
-  if (commentsList.length < 5) {
+  if (commentsList.length < INITIAL_COMMENTS_COUNT) {
     commentsShowCount.textContent = commentsList.length;
   } else {
-    commentsShowCount.textContent = 5;
+    commentsShowCount.textContent = INITIAL_COMMENTS_COUNT;
   }
 };
 
