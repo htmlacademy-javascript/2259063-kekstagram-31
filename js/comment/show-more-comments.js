@@ -16,7 +16,7 @@ const showMoreComments = (commentList, interval, button, counter) => {
     }
   }
 
-  const ShowMoreCommentsHandler = () => {
+  const showMoreCommentsHandler = () => {
     const showedCount = document.querySelectorAll('.social__comment:not(.hidden)').length;
     if (commentsToShow > showedCount) {
       commentsToShow = interval;
@@ -37,7 +37,7 @@ const showMoreComments = (commentList, interval, button, counter) => {
   };
 
   if (!isHandlerOn) {
-    button.addEventListener('click', ShowMoreCommentsHandler);
+    button.addEventListener('click', showMoreCommentsHandler);
     isHandlerOn = true;
   }
 };

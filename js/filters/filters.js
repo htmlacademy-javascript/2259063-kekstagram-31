@@ -2,11 +2,11 @@ import { debounce } from '../util';
 import { handleFilterButtonClick } from './handle-filter-button';
 
 const RERENDER_DELAY = 500;
-const filters = document.querySelector('.img-filters');
+const filtersWrapper = document.querySelector('.img-filters');
 const filterButtons = document.querySelectorAll('.img-filters__button');
 
 const showFiltersForPreviewPanel = () => {
-  filters.classList.remove('img-filters--inactive');
+  filtersWrapper.classList.remove('img-filters--inactive');
 };
 
 const debounceHandleFilterButtonClick = debounce(handleFilterButtonClick, RERENDER_DELAY);

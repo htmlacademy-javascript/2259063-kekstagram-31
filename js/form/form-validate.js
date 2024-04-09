@@ -84,6 +84,11 @@ const setPictureFormSubmit = (onSuccess) => {
 
     if (pristine.validate()) {
       const submitButton = uploadForm.querySelector('.img-upload__submit');
+      const errorFields = uploadForm.querySelector('.img-upload__field-wrapper--error');
+      if (errorFields) {
+        errorFields.classList.remove('img-upload__field-wrapper--error');
+      }
+
       submitButton.disabled = true;
 
       sendData(new FormData(evt.target))

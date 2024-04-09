@@ -1,22 +1,25 @@
 import { uploadPicturePreviev } from './form-modal';
 
-const SCALE_INTERVAL = 25;
-const SCALE_MIN = 25;
-const SCALE_MAX = 100;
+const SCALE = {
+  INTERVAL: 25,
+  MIN: 25,
+  MAX: 100
+};
+
 const scaleControl = document.querySelector('.scale');
 const increaseScaleControlButton = scaleControl.querySelector('.scale__control--bigger');
 const decreaseScaleControlButton = scaleControl.querySelector('.scale__control--smaller');
 const scaleControlValue = scaleControl.querySelector('.scale__control--value');
-let defaultScale = 100;
+let defaultScale = SCALE.MAX;
 
 const changeScale = (direction) => {
-  if (direction === 'increase' && defaultScale < SCALE_MAX) {
-    defaultScale += SCALE_INTERVAL;
-  } else if (direction === 'decrease' && defaultScale > SCALE_MIN) {
-    defaultScale -= SCALE_INTERVAL;
+  if (direction === 'increase' && defaultScale < SCALE.MAX) {
+    defaultScale += SCALE.INTERVAL;
+  } else if (direction === 'decrease' && defaultScale > SCALE.MIN) {
+    defaultScale -= SCALE.INTERVAL;
   }
 
-  uploadPicturePreviev.style.transform = `scale(${defaultScale / 100})`;
+  uploadPicturePreviev.style.transform = `scale(${defaultScale / SCALE.MAX})`;
   scaleControlValue.value = `${defaultScale}%`;
 };
 
@@ -40,8 +43,8 @@ const removeScaleEventHandlers = () => {
 
 // сброс масштаба до дефолтного
 const resetScale = () => {
-  defaultScale = 100;
-  uploadPicturePreviev.style.transform = `scale(${defaultScale / 100})`;
+  defaultScale = SCALE.MAX;
+  uploadPicturePreviev.style.transform = `scale(${defaultScale / SCALE.MAX})`;
   scaleControlValue.value = `${defaultScale}%`;
 };
 

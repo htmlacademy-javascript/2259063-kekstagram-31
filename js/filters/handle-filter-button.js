@@ -1,24 +1,24 @@
-
 import { renderPictures } from '../picture/render-pictures';
 import { getRandomElementsFromArray, removeElements } from '../util';
+import { openPicture } from '../picture/open-picture';
 
 const AMOUNT_FOR_RANDOM_FILTER = 10;
 
 const renderDefault = (data) => {
   removeElements('.picture');
-  renderPictures(data);
+  openPicture(renderPictures(data), data);
 };
 
 const renderRandom = (data) => {
   removeElements('.picture');
   const randomData = getRandomElementsFromArray(data, AMOUNT_FOR_RANDOM_FILTER);
-  renderPictures(randomData);
+  openPicture(renderPictures(randomData), randomData);
 };
 
 const renderSorted = (data) => {
   removeElements('.picture');
   const sortedData = data.slice().sort((a, b) => b.comments.length - a.comments.length);
-  renderPictures(sortedData);
+  openPicture(renderPictures(sortedData), sortedData);
 };
 
 const handleFilterButtonClick = (data, evt) => {
