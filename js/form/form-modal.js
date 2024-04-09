@@ -29,9 +29,7 @@ const closeUploadPictureHandler = () => {
   removeEffectFieldsetEventHandler();
   resetEffectSlider();
   uploadForm.reset();
-  pristine.reset()
-
-
+  pristine.reset();
 };
 
 function uploadPictureKeyDownHandler(evt) {
