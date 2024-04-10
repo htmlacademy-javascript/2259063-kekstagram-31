@@ -16,7 +16,7 @@ const openModalBigPicture = () => {
   }
 };
 
-const closeModalBigPicture = () => {
+const closeModalBigPictureHandler = () => {
   commentsList.innerHTML = '';
   modalBigPicture.classList.add('hidden');
   document.body.classList.remove('modal-open');
@@ -25,10 +25,10 @@ const closeModalBigPicture = () => {
 
 function bigPictureKeyDownHandler(evt) {
   if (evt.key === 'Escape') {
-    closeModalBigPicture();
+    closeModalBigPictureHandler();
   }
 }
 
-modalBigPictureCloseButton.addEventListener('click', closeModalBigPicture);
+modalBigPictureCloseButton.addEventListener('click', closeModalBigPictureHandler);
 
 export { modalBigPicture, openModalBigPicture };

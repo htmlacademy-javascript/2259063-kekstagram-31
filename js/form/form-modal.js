@@ -43,7 +43,6 @@ function setValidateMessageState(value) {
 }
 
 const openUploadPicture = () => {
-  uploadForm.reset();
   uploadPictureInput.addEventListener('change', uploadPictureHandler);
   uploadOverlaycloseButton.addEventListener('click', closeUploadPictureHandler);
 };

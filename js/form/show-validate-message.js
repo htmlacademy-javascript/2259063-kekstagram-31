@@ -7,18 +7,18 @@ const showValidateMessage = (value) => {
   const validateMessageButton = document.querySelector(`.${value}__button`);
   const validateMessageInner = validateMessage.querySelector(`.${value}__inner`);
 
-  const onValidateMessageButtonClick = () => {
+  const validateMessageButtonClickHandler = () => {
     closeValidateMessage();
   };
 
-  const onDocumentKeydown = (evt) => {
+  const documentKeydownHandler = (evt) => {
     if (evt.key === 'Escape') {
       evt.stopPropagation();
       closeValidateMessage();
     }
   };
 
-  const onDocumentClick = (evt) => {
+  const documentClickHandler = (evt) => {
     if (!validateMessageInner.contains(evt.target)) {
       closeValidateMessage();
     }
@@ -27,14 +27,14 @@ const showValidateMessage = (value) => {
   function closeValidateMessage() {
     validateMessage.remove();
     setValidateMessageState(false);
-    document.removeEventListener('keydown', onDocumentKeydown);
-    document.removeEventListener('click', onDocumentClick);
-    validateMessageButton.removeEventListener('click', onValidateMessageButtonClick);
+    document.removeEventListener('keydown', documentKeydownHandler);
+    document.removeEventListener('click', documentClickHandler);
+    validateMessageButton.removeEventListener('click', validateMessageButtonClickHandler);
   }
 
-  validateMessageButton.addEventListener('click', onValidateMessageButtonClick);
-  document.addEventListener('keydown', onDocumentKeydown);
-  document.addEventListener('click', onDocumentClick);
+  validateMessageButton.addEventListener('click', validateMessageButtonClickHandler);
+  document.addEventListener('keydown', documentKeydownHandler);
+  document.addEventListener('click', documentClickHandler);
 
   setValidateMessageState(true);
 };
