@@ -14,8 +14,6 @@ const pristine = new Pristine(uploadForm, {
   errorClass: 'img-upload__field-wrapper--error',
   successClass: 'img-upload__field-wrapper',
   errorTextParent: 'img-upload__field-wrapper',
-  errorTextTag: 'div',
-  errorTextClass: 'pristine-error'
 }
 );
 const inputHashtag = uploadForm.querySelector('#hashtags');
@@ -84,10 +82,6 @@ const setPictureFormSubmit = (onSuccess) => {
 
     if (pristine.validate()) {
       const submitButton = uploadForm.querySelector('.img-upload__submit');
-      const errorFields = uploadForm.querySelector('.img-upload__field-wrapper--error');
-      if (errorFields) {
-        errorFields.classList.remove('img-upload__field-wrapper--error');
-      }
 
       submitButton.disabled = true;
 
