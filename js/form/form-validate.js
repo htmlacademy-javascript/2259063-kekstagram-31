@@ -12,7 +12,6 @@ const uploadForm = document.querySelector('.img-upload__form');
 const pristine = new Pristine(uploadForm, {
   classTo: 'img-upload__field-wrapper',
   errorClass: 'img-upload__field-wrapper--error',
-  successClass: 'img-upload__field-wrapper',
   errorTextParent: 'img-upload__field-wrapper',
 }
 );
